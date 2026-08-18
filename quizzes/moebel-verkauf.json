@@ -1,0 +1,269 @@
+{
+  "quizId": "moebel-verkauf",
+  "quizVersion": "1.1",
+  "language": { "pronoun": "Sie" },
+  "topbarLabel": "Online-Test",
+  "progressLabel": "Ihr Bewerbungsfortschritt",
+  "continueLabel": "Weiter",
+
+  "branding": {
+    "primary": "#2D5A3D",
+    "accent": "#E8A838"
+  },
+
+  "job": {
+    "title": "Küchen- und Möbelverkäufer (m/w/d)",
+    "company": "Möbelhaus Saartal"
+  },
+
+  "steps": [
+    { "id": "test", "label": "Online-Test" },
+    { "id": "contact", "label": "Kontaktdaten" }
+  ],
+
+  "welcome": {
+    "intro": "Sie beraten Kundinnen und Kunden mit Freude und verkaufen mit Überzeugung? Dann beantworten Sie die folgenden Fragen und bewerben Sie sich in unter 5 Minuten.",
+    "metaText": "Dauer: ca. 4 Minuten · Keine Bewerbungsunterlagen nötig",
+    "startButton": "Online-Test starten"
+  },
+
+  "categories": {
+    "fachqualifikation": { "label": "Fachqualifikation", "weight": 0.35 },
+    "berufserfahrung": { "label": "Berufserfahrung", "weight": 0.3 },
+    "verfuegbarkeit": { "label": "Verfügbarkeit", "weight": 0.2 },
+    "motivation": { "label": "Motivation", "weight": 0.15 }
+  },
+
+  "tiers": [
+    { "id": "top", "label": "Top-Kandidat", "min": 80 },
+    { "id": "good", "label": "Guter Fit", "min": 60 },
+    { "id": "conditional", "label": "Bedingt geeignet", "min": 40 },
+    { "id": "low", "label": "Nicht passend", "min": 0 }
+  ],
+
+  "scoring": {
+    "rejectThreshold": 40,
+    "matchScreen": {
+      "headline": "Volltreffer!",
+      "body": "Ihr Profil passt richtig gut zu dieser Stelle. Nur noch ein Schritt: Hinterlassen Sie Ihre Kontaktdaten, damit wir uns bei Ihnen melden können."
+    },
+    "rejectScreen": {
+      "headline": "Leider passt es aktuell nicht.",
+      "body": "Danke, dass Sie sich die Zeit genommen haben. Ihr Profil passt leider nicht zu den aktuellen Anforderungen dieser Stelle. Falls Sie jemanden kennen, der passen könnte — teilen Sie die Stelle gerne:",
+      "showShare": false
+    }
+  },
+
+  "knockoutFlags": [
+    {
+      "id": "samstag_impossible",
+      "description": "Samstagsarbeit nicht möglich",
+      "rules": { "questionId": "q_samstag", "answerIndex": [3] }
+    }
+  ],
+
+  "questions": [
+    {
+      "id": "q_bereich",
+      "category": "fachqualifikation",
+      "type": "single_select",
+      "question": "In welchem Bereich sind Sie aktuell oder zuletzt tätig gewesen?",
+      "answers": [
+        { "text": "Küchen- oder Möbelverkauf", "points": 100 },
+        { "text": "Verkauf/Einzelhandel, andere Branche", "points": 60 },
+        { "text": "Handwerk/technisch", "points": 40 },
+        { "text": "Quereinsteiger", "points": 20 }
+      ]
+    },
+    {
+      "id": "q_beratung",
+      "category": "fachqualifikation",
+      "type": "single_select",
+      "question": "Haben Sie bereits Erfahrung in der Kundenberatung oder im Verkauf?",
+      "answers": [
+        { "text": "Ja, im Küchenverkauf", "points": 100 },
+        { "text": "Ja, in einer anderen Branche", "points": 60 },
+        { "text": "Teilweise", "points": 30 },
+        { "text": "Nein", "points": 0 }
+      ]
+    },
+    {
+      "id": "q_jahre",
+      "category": "berufserfahrung",
+      "type": "single_select",
+      "question": "Wie lange haben Sie bereits in der Küchen- oder Möbelbranche gearbeitet?",
+      "answers": [
+        { "text": "Noch keine Berufserfahrung", "points": 10 },
+        { "text": "1–3 Jahre", "points": 50 },
+        { "text": "4–10 Jahre", "points": 80 },
+        { "text": "Mehr als 10 Jahre", "points": 100 }
+      ]
+    },
+    {
+      "id": "q_software",
+      "category": "fachqualifikation",
+      "type": "single_select",
+      "question": "Haben Sie bereits mit Planungssoftware (z.B. CARAT, KPS) gearbeitet?",
+      "answers": [
+        { "text": "Ja, regelmäßig", "points": 100 },
+        { "text": "Ja, Grundkenntnisse", "points": 60 },
+        { "text": "Nein, aber lernbereit", "points": 30 },
+        { "text": "Nein, keine Erfahrung und kein Interesse", "points": 0 }
+      ]
+    },
+    {
+      "id": "q_raeumlich",
+      "category": "fachqualifikation",
+      "type": "single_select",
+      "question": "Wie schätzen Sie Ihr räumliches Vorstellungsvermögen ein?",
+      "answers": [
+        { "text": "Sehr gut", "points": 100 },
+        { "text": "Gut", "points": 70 },
+        { "text": "Durchschnittlich", "points": 40 },
+        { "text": "Eher schwach", "points": 10 }
+      ]
+    },
+    {
+      "id": "q_sprachen",
+      "category": "motivation",
+      "type": "single_select",
+      "question": "Welche Sprachkenntnisse bringen Sie mit?",
+      "answers": [
+        { "text": "Deutsch (Muttersprache)", "points": 70 },
+        { "text": "Deutsch und Englisch", "points": 85 },
+        { "text": "Deutsch und Französisch", "points": 85 },
+        { "text": "Deutsch, Englisch und Französisch", "points": 100 }
+      ]
+    },
+    {
+      "id": "q_beschaeftigt",
+      "category": "verfuegbarkeit",
+      "type": "single_select",
+      "question": "Wie sind Sie derzeit beschäftigt?",
+      "answers": [
+        { "text": "Arbeitssuchend", "points": 100 },
+        { "text": "Fest angestellt", "points": 70 },
+        { "text": "Selbständig", "points": 60 },
+        { "text": "In Ausbildung/Studium", "points": 40 },
+        { "text": "Sonstiges", "points": 30 }
+      ]
+    },
+    {
+      "id": "q_arbeitszeit",
+      "category": "verfuegbarkeit",
+      "type": "single_select",
+      "question": "Welche Arbeitszeiten kommen für Sie infrage?",
+      "answers": [
+        { "text": "Vollzeit", "points": 100 },
+        { "text": "Vollzeit oder Teilzeit", "points": 80 },
+        { "text": "Nur Teilzeit", "points": 50 }
+      ]
+    },
+    {
+      "id": "q_samstag",
+      "category": "verfuegbarkeit",
+      "type": "single_select",
+      "question": "Wie stehen Sie zur Arbeit an Samstagen?",
+      "answers": [
+        { "text": "Kein Problem", "points": 100 },
+        { "text": "Grundsätzlich möglich", "points": 75 },
+        { "text": "Nur gelegentlich", "points": 30 },
+        { "text": "Nicht möglich", "points": 0 }
+      ]
+    },
+    {
+      "id": "q_motivation",
+      "category": "motivation",
+      "type": "single_select",
+      "question": "Warum interessieren Sie sich für die Möbelbranche?",
+      "answers": [
+        {
+          "text": "Ich bin bereits in der Branche und suche eine neue Herausforderung",
+          "points": 100
+        },
+        { "text": "Interesse an Design und Einrichtung", "points": 70 },
+        { "text": "Ich suche generell eine neue berufliche Herausforderung", "points": 50 },
+        { "text": "Ich brauche einen Job", "points": 20 }
+      ]
+    },
+    {
+      "id": "q_weiterbildung",
+      "category": "motivation",
+      "type": "single_select",
+      "question": "Wie stehen Sie zur Weiterbildung?",
+      "answers": [
+        { "text": "Sehr offen, ich bilde mich regelmäßig fort", "points": 100 },
+        { "text": "Grundsätzlich offen", "points": 65 },
+        { "text": "Nur wenn nötig", "points": 30 },
+        { "text": "Eher nicht", "points": 0 }
+      ]
+    },
+    {
+      "id": "q_location",
+      "category": "verfuegbarkeit",
+      "type": "text_input",
+      "question": "In welcher Stadt oder Region wohnen Sie?",
+      "placeholder": "z. B. Saarbrücken, Kaiserslautern, Trier...",
+      "points": null
+    }
+  ],
+
+  "leadForm": {
+    "heading": "Ihre Kontaktdaten",
+    "subtitle": "Füllen Sie bitte alle Pflichtfelder aus, damit wir uns bei Ihnen melden können.",
+    "submitLabel": "Bewerbung absenden ›",
+    "salutation": true,
+    "salutationLabel": "Anrede",
+    "whatsappOptIn": "Benachrichtigungen über WhatsApp erhalten (optional)",
+    "privacyNote": "Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Bewerbung verwendet und gemäß DSGVO vertraulich behandelt.",
+    "fields": [
+      {
+        "name": "firstName",
+        "label": "Vorname",
+        "type": "text",
+        "required": true,
+        "half": true,
+        "placeholder": "Max",
+        "errorMessage": "Bitte geben Sie Ihren Vornamen an"
+      },
+      {
+        "name": "lastName",
+        "label": "Nachname",
+        "type": "text",
+        "required": true,
+        "half": true,
+        "placeholder": "Mustermann",
+        "errorMessage": "Bitte geben Sie Ihren Nachnamen an"
+      },
+      {
+        "name": "email",
+        "label": "E-Mail",
+        "type": "email",
+        "required": true,
+        "placeholder": "max@beispiel.de",
+        "errorMessage": "Bitte geben Sie eine gültige E-Mail-Adresse an"
+      },
+      {
+        "name": "phone",
+        "label": "Telefon",
+        "type": "tel",
+        "required": true,
+        "help": "damit wir Sie schneller erreichen können",
+        "placeholder": "+49 123 456 7890",
+        "errorMessage": "Bitte geben Sie Ihre Telefonnummer an"
+      },
+      { "name": "startDate", "label": "Frühester Starttermin", "type": "date", "required": false },
+      { "name": "message", "label": "Nachricht (optional)", "type": "textarea", "required": false }
+    ]
+  },
+
+  "thankYou": {
+    "headline": "Vielen Dank für Ihre Bewerbung!",
+    "body": "Wir prüfen Ihr Profil und melden uns zeitnah bei Ihnen.",
+    "share": { "whatsapp": false, "linkedin": false, "facebook": false }
+  },
+
+  "webhook": {
+    "url": ""
+  }
+}

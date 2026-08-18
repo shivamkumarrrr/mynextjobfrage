@@ -1,0 +1,21 @@
+{
+  "name": "quiz-engine",
+  "version": "1.0.0",
+  "description": "Config-driven recruiting quiz engine (Vanilla JS). Scoring + webhook are internal only.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bash dev.sh",
+    "preview": "bash dev.sh",
+    "test": "node --test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "puppeteer": "^25.8.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

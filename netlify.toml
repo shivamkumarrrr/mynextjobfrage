@@ -1,0 +1,6 @@
+# Optional — only needed if you prefer Netlify over Vercel.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors *; connect-src 'self' https:"
+    Access-Control-Allow-Origin = "*"
