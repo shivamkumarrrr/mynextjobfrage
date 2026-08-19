@@ -1,4 +1,8 @@
 # Optional — only needed if you prefer Netlify over Vercel.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
 [[headers]]
   for = "/*"
   [headers.values]
