@@ -7,7 +7,7 @@ import { QUIZ_LINK, company, hero } from './content';
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-[1100px] px-5 pt-4 pb-0 md:px-10 md:pt-5 md:pb-1">
+      <div className="mx-auto max-w-[1100px] px-5 pt-4 pb-10 md:px-10 md:pt-5 md:pb-14">
         {/* Logo centered at top */}
         <div className="mb-10 flex flex-col items-center md:mb-12">
           <img src={company.logo} alt={company.name} className="h-10 w-auto md:h-12" />
