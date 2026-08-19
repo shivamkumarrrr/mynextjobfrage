@@ -1,0 +1,158 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    line-height: 1.5;
+    font-size: 16px;
+  }
+}
+
+/*
+  Each screen moves focus to its heading so screen readers announce the new
+  step. The heading is not interactive, so it takes no focus ring — the ring
+  stays on the buttons and inputs that can actually be operated.
+*/
+[data-focus]:focus,
+[data-focus]:focus-visible {
+  outline: none;
+}
+
+/* ------------------------------------------------------------------
+   SVG line-draw animations (checkmark / rejection X / match rings).
+   Kept as hand-written CSS: stroke-dashoffset choreography is not
+   something utility classes express well.
+   ------------------------------------------------------------------ */
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes drawCheck {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes matchBullIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke: var(--accent);
+  animation: drawCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark-check {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 5;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: drawCheck 0.35s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+.rejection-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke: var(--muted);
+  animation: drawCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.rejection-x {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 5;
+  stroke: var(--danger);
+  stroke-linecap: round;
+  animation: drawCheck 0.35s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+.match-ring {
+  stroke-width: 3;
+  stroke: var(--accent);
+  transform-origin: center;
+}
+.match-ring-outer {
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: drawCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.match-ring-mid {
+  stroke-dasharray: 101;
+  stroke-dashoffset: 101;
+  animation: drawCircle 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.15s forwards;
+}
+.match-ring-bull {
+  fill: var(--accent);
+  transform: scale(0);
+  transform-origin: center;
+  animation: matchBullIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s forwards;
+}
+
+/* Progress bar shine */
+@keyframes progressShine {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.progress-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  border-radius: 999px;
+  animation: progressShine 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .checkmark-circle,
+  .checkmark-check,
+  .rejection-circle,
+  .rejection-x,
+  .match-ring-outer,
+  .match-ring-mid {
+    stroke-dashoffset: 0;
+  }
+  .match-ring-bull {
+    transform: scale(1);
+  }
+  .progress-active::after {
+    opacity: 0;
+  }
+}

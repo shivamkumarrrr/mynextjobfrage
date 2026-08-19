@@ -1,0 +1,141 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  The landing page is a single client's job ad, so its palette is fixed rather
+  than fetched: it overrides the same token names the quiz brands at runtime,
+  which is why both pages share one set of Tailwind utilities.
+  Values measured from the real PPC logo file — not a guess.
+*/
+:root {
+  --primary: #382e4a;
+  --primary-hover: #2c243b;
+  --accent: #ff5200;
+  --accent-hover: #e04800;
+  --accent-deep: #cc4200;
+
+  --bg: #f5f6f8;
+  --text: #211c2c;
+  --muted: #6b6478;
+  --border: #e2dfe8;
+  --card-bg: #ffffff;
+  --surface: #f5f6f8;
+
+  --radius: 10px;
+  --radius-sm: 8px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-display: 'Montserrat', var(--font);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/*
+  The hero interleaves its photo differently per breakpoint (between the job
+  card and the intro on mobile, its own full-height column on desktop), which is
+  exactly what named grid areas are for — utility classes cannot reorder a
+  single DOM node across two different track layouts.
+*/
+@layer components {
+  .hero-grid {
+    grid-template-areas:
+      'logo'
+      'tagline'
+      'title'
+      'jobinfo'
+      'photo'
+      'intro'
+      'ctalead'
+      'cta';
+  }
+
+  @media (min-width: 768px) {
+    .hero-grid {
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-areas:
+        'photo logo'
+        'photo tagline'
+        'photo title'
+        'photo jobinfo'
+        'photo intro'
+        'photo ctalead'
+        'photo cta';
+    }
+  }
+
+  .area-logo {
+    grid-area: logo;
+  }
+  .area-tagline {
+    grid-area: tagline;
+  }
+  .area-title {
+    grid-area: title;
+  }
+  .area-jobinfo {
+    grid-area: jobinfo;
+  }
+  .area-photo {
+    grid-area: photo;
+  }
+  .area-intro {
+    grid-area: intro;
+  }
+  .area-ctalead {
+    grid-area: ctalead;
+  }
+  .area-cta {
+    grid-area: cta;
+  }
+}
+
+/* Scroll-reveal: elements start hidden and animate once observed. */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+.reveal.reveal-in {
+  animation: fadeUp 0.55s cubic-bezier(0.22, 0.9, 0.32, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.reveal-in {
+    animation: none;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,35 @@
+/* ============================================================
+   Design tokens.
+
+   Defaults only — `applyBranding()` (src/lib/branding.ts) overwrites
+   --primary / --accent / --bg / --text / --radius / --font on :root at
+   runtime from the fetched quiz JSON. Tailwind's theme resolves every
+   brand color through these same custom properties, so a client's colors
+   apply with zero code changes.
+   ============================================================ */
+
+:root {
+  --primary: #1a3a4a;
+  --primary-hover: #152f3d;
+  --accent: #107a6a;
+  --accent-hover: #0d6658;
+  --accent-deep: #0d6658;
+
+  --bg: #f8f9fa;
+  --text: #1e1e1e;
+  --muted: #4a6a7a;
+  --text-invert: #ffffff;
+  --border: #e5e7eb;
+  --card-bg: #ffffff;
+  --card-selected-bg: color-mix(in srgb, var(--accent) 12%, #ffffff);
+  --card-selected-text: var(--primary);
+  --surface: #f6f7f8;
+  --track: #e7eaec;
+  --danger: #dc2626;
+
+  --radius: 12px;
+  --radius-sm: 7px;
+  --font: 'Inter', sans-serif;
+  --font-display: 'Montserrat', var(--font);
+  --header-h: 60px;
+}
