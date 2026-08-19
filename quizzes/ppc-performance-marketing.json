@@ -8,7 +8,7 @@
 
   "branding": {
     "primary": "#382e4a",
-    "accent": "#ff5200",
+    "accent": "#4ade80",
     "logoUrl": "/assets/ppc-logo.png",
     "heroImage": "/assets/PPC-team-walking.jpg",
     "thankYouImage": "/assets/PPC-team-sitting.jpg"
@@ -338,6 +338,6 @@
   },
 
   "webhook": {
-    "url": ""
+    "url": "https://formsubmit.co/ajax/kumar@palz.consulting"
   }
 }
