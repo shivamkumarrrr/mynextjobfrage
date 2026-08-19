@@ -37,7 +37,11 @@ describe('buildFieldRows', () => {
       field('e', true),
       field('f', true),
     ];
-    expect(buildFieldRows(fields).flat().map((f) => f.name)).toEqual(fields.map((f) => f.name));
+    expect(
+      buildFieldRows(fields)
+        .flat()
+        .map((f) => f.name)
+    ).toEqual(fields.map((f) => f.name));
   });
 
   test('both shipped quizzes lay out without a stray half field', () => {

@@ -8,12 +8,12 @@ await mkdir(OUT, { recursive: true });
 
 const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
-page.on('console', msg => console.log('  BROWSER:', msg.type(), msg.text()));
-page.on('pageerror', err => console.log('  PAGE ERROR:', err.message));
+page.on('console', (msg) => console.log('  BROWSER:', msg.type(), msg.text()));
+page.on('pageerror', (err) => console.log('  PAGE ERROR:', err.message));
 
 async function shot(name, viewport) {
   await page.setViewport(viewport);
-  await new Promise(r => setTimeout(r, 1500));
+  await new Promise((r) => setTimeout(r, 1500));
   await page.screenshot({ path: `${OUT}/${name}.png`, fullPage: true });
   console.log(`  ✓ ${name}`);
 }
@@ -21,22 +21,22 @@ async function shot(name, viewport) {
 async function clickAnswer(idx = 1) {
   const answers = await page.$$('[data-answer]');
   if (answers.length > idx) await answers[idx].click();
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise((r) => setTimeout(r, 600));
 }
 
 async function clickMultiNext() {
   const btn = await page.$('[data-multi-next]:not([disabled])');
   if (btn) await btn.click();
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise((r) => setTimeout(r, 600));
 }
 
 async function typeTextAnswer(text) {
   const input = await page.$('[data-text-answer]');
   if (input) await input.type(text);
-  await new Promise(r => setTimeout(r, 200));
+  await new Promise((r) => setTimeout(r, 200));
   const btn = await page.$('[data-text-next]:not([disabled])');
   if (btn) await btn.click();
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise((r) => setTimeout(r, 600));
 }
 
 const MOBILE = { width: 375, height: 812 };
@@ -54,8 +54,8 @@ const quizUrl = `${BASE}/?q=ppc-performance-marketing`;
 console.log('  Navigating to:', quizUrl);
 await page.goto(quizUrl, { waitUntil: 'networkidle0' });
 console.log('  Current URL:', page.url());
-await new Promise(r => setTimeout(r, 2000));
-const bodyText = await page.$eval('body', el => el.innerText.substring(0, 500));
+await new Promise((r) => setTimeout(r, 2000));
+const bodyText = await page.$eval('body', (el) => el.innerText.substring(0, 500));
 console.log('  Page text:', bodyText.replace(/\n/g, ' | '));
 const startBtnMobile = await page.$('[data-start]');
 console.log('  [data-start] found:', !!startBtnMobile);
@@ -65,7 +65,7 @@ await shot('02-quiz-welcome-mobile', MOBILE);
 const startBtn = await page.$('[data-start]');
 if (startBtn) {
   await startBtn.click();
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise((r) => setTimeout(r, 600));
   await shot('03-question-1-mobile', MOBILE);
 
   // 4. Answer Q1 → Q2
@@ -93,10 +93,10 @@ if (startBtn) {
     if (ans.length > 0) await clickAnswer(Math.min(2, ans.length - 1));
   }
 
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise((r) => setTimeout(r, 600));
 
   // 7. Capture final screen
-  const screenHtml = await page.$eval('#screen', el => el.innerHTML);
+  const screenHtml = await page.$eval('#screen', (el) => el.innerHTML);
   if (screenHtml.includes('lead-form')) {
     await shot('06-lead-form-mobile', MOBILE);
   } else if (screenHtml.includes('rejection')) {
@@ -121,7 +121,7 @@ await shot('08-quiz-welcome-desktop', DESKTOP);
 const startBtn2 = await page.$('[data-start]');
 if (startBtn2) {
   await startBtn2.click();
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise((r) => setTimeout(r, 600));
   await shot('09-question-desktop', DESKTOP);
 }
 

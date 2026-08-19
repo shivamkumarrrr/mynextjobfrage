@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check } from 'lucide-react';
+import { ImageWithFallback } from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -21,7 +22,7 @@ interface QuestionProps {
   onAnswer: (record: AnswerRecord) => void;
 }
 
-export function Question({ config, question, index, total, onAnswer }: QuestionProps) {
+export function Question({ config, question, index: _i, total: _t, onAnswer }: QuestionProps) {
   const isMulti = question.type === 'multi_select';
   const isText = question.type === 'text_input';
   const options = question.answers || [];
@@ -34,13 +35,12 @@ export function Question({ config, question, index, total, onAnswer }: QuestionP
   // Any pending auto-advance dies with the question it belongs to; the parent
   // remounts this component per question (keyed by id), so a stale timer can
   // never fire into the next one.
-  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
-
-  const kicker = isText
-    ? 'Freitext'
-    : isMulti
-      ? 'Mehrfachauswahl'
-      : `Frage ${index + 1} von ${total}`;
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    []
+  );
 
   const selectSingle = (value: string) => {
     setSingle(value);
@@ -65,10 +65,19 @@ export function Question({ config, question, index, total, onAnswer }: QuestionP
   const continueLabel = config.continueLabel || 'Weiter';
 
   return (
-    <section className="animate-screenIn">
-      <p className="mb-3.5 text-[13px] font-semibold uppercase tracking-[0.06em] text-muted">
-        {kicker}
-      </p>
+    <section>
+      {question.image && (
+        <div className="mb-[18px] overflow-hidden rounded-brand bg-surface">
+          <ImageWithFallback
+            src={question.image}
+            alt=""
+            fallbackLabel="Bild"
+            loading="lazy"
+            className="block aspect-video w-full object-cover"
+            fallbackClassName="aspect-video"
+          />
+        </div>
+      )}
       <h2
         className="mb-[22px] text-[clamp(1.3rem,3.5vw,1.5rem)] font-bold leading-snug text-primary"
         tabIndex={-1}
@@ -96,9 +105,7 @@ export function Question({ config, question, index, total, onAnswer }: QuestionP
             type="button"
             size="block"
             disabled={!text.trim()}
-            onClick={() =>
-              onAnswer(buildTextAnswerRecord(question, text.trim()))
-            }
+            onClick={() => onAnswer(buildTextAnswerRecord(question, text.trim()))}
           >
             {continueLabel}
           </Button>
@@ -135,7 +142,11 @@ export function Question({ config, question, index, total, onAnswer }: QuestionP
           </div>
         </>
       ) : (
-        <RadioGroup value={single ?? ''} onValueChange={selectSingle} aria-label={question.question}>
+        <RadioGroup
+          value={single ?? ''}
+          onValueChange={selectSingle}
+          aria-label={question.question}
+        >
           {options.map((option, j) => (
             <RadioGroupItem
               key={option.text}

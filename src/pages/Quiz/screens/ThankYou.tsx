@@ -15,10 +15,10 @@ export function ThankYou({ config }: ThankYouProps) {
     `Ich habe mich als ${config.job && config.job.title} bei ${config.job && config.job.company} beworben!`;
 
   return (
-    <section className="animate-screenIn pt-4 text-center">
+    <section className="pt-4 text-center">
       {branding.thankYouImage && (
         <img
-          className="mb-5 block max-h-[200px] w-full rounded-lg object-cover md:max-h-[240px]"
+          className="mb-5 block aspect-[16/7] w-full rounded-lg object-cover md:aspect-[16/6]"
           src={branding.thankYouImage}
           alt={(config.job && config.job.company) || ''}
           loading="lazy"

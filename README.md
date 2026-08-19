@@ -92,16 +92,18 @@ Set `"webhook": { "url": "https://your-endpoint.example/leads" }` in the quiz JS
 ## Embed on any website
 
 ```html
-<iframe src="https://quiz.my-next-job.de/app?q=ppc-performance-marketing"
+<iframe
+  src="https://quiz.my-next-job.de/app?q=ppc-performance-marketing"
   style="width:100%;border:none;min-height:600px"
   id="mnj-quiz"
-  title="Bewerbungs-test"></iframe>
+  title="Bewerbungs-test"
+></iframe>
 
 <script>
-window.addEventListener('message', (e) => {
-  if (e.data?.type === 'quiz-resize')
-    document.getElementById('mnj-quiz').style.height = e.data.height + 'px';
-});
+  window.addEventListener('message', (e) => {
+    if (e.data?.type === 'quiz-resize')
+      document.getElementById('mnj-quiz').style.height = e.data.height + 'px';
+  });
 </script>
 ```
 
@@ -142,14 +144,27 @@ WELCOME → QUESTIONS (1..n sequential, one per screen) → LEAD_FORM → THANK_
     "total": 78.4,
     "tier": { "id": "strong", "label": "Starker Fit", "min": 70 },
     "categories": {
-      "hardSkills":    { "score": 85, "weight": 0.40, "weighted": 34.0, "label": "Fachliche Kompetenz" },
-      "knowledgeTests":{ "score": 100, "weight": 0.25, "weighted": 25.0, "label": "Fachwissen" }
+      "hardSkills": {
+        "score": 85,
+        "weight": 0.4,
+        "weighted": 34.0,
+        "label": "Fachliche Kompetenz"
+      },
+      "knowledgeTests": { "score": 100, "weight": 0.25, "weighted": 25.0, "label": "Fachwissen" }
     },
     "hasKnockout": false
   },
   "knockoutFlags": [
-    { "id": "deutsch_below_c1",    "description": "Deutsch unter Verhandlungsniveau", "triggered": false },
-    { "id": "zero_paid_experience","description": "Keine Google/Meta Ads Erfahrung", "triggered": false }
+    {
+      "id": "deutsch_below_c1",
+      "description": "Deutsch unter Verhandlungsniveau",
+      "triggered": false
+    },
+    {
+      "id": "zero_paid_experience",
+      "description": "Keine Google/Meta Ads Erfahrung",
+      "triggered": false
+    }
   ],
   "answers": [
     {

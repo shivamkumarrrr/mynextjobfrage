@@ -48,10 +48,28 @@ const config: QuizConfig = {
     },
   ],
   questions: [
-    { id: 'q_google_ads', category: 'hardSkills', type: 'single_select', question: '', answers: [] },
+    {
+      id: 'q_google_ads',
+      category: 'hardSkills',
+      type: 'single_select',
+      question: '',
+      answers: [],
+    },
     { id: 'q_meta_ads', category: 'hardSkills', type: 'single_select', question: '', answers: [] },
-    { id: 'q_deutsch', category: 'fitPreferences', type: 'single_select', question: '', answers: [] },
-    { id: 'q_english', category: 'fitPreferences', type: 'single_select', question: '', answers: [] },
+    {
+      id: 'q_deutsch',
+      category: 'fitPreferences',
+      type: 'single_select',
+      question: '',
+      answers: [],
+    },
+    {
+      id: 'q_english',
+      category: 'fitPreferences',
+      type: 'single_select',
+      question: '',
+      answers: [],
+    },
     {
       id: 'q_cpl_test',
       category: 'knowledgeTests',
@@ -306,9 +324,7 @@ describe('evaluateQuiz routing', () => {
     // Deliberately avoid the Saturday knockout (index 3 on q_samstag) while
     // answering everything else as weakly as possible.
     const answers = worstAnswers(quiz).map((answer) =>
-      answer.questionId === 'q_samstag'
-        ? { ...answer, answerIndex: 2, points: 30 }
-        : answer
+      answer.questionId === 'q_samstag' ? { ...answer, answerIndex: 2, points: 30 } : answer
     );
     const result = evaluateQuiz(quiz, answers);
     expect(result.scoring.hasKnockout).toBe(false);

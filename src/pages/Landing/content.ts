@@ -18,44 +18,45 @@ export const hero = {
   photo: 'assets/PPC-team-walking.jpg',
   photoAlt: 'PPC GmbH Team',
   intro:
-    'Du kannst dir vorstellen, in einer Performance-Marketing-Agentur zu arbeiten, und hast Lust, dich in spannenden Projekten einzubringen und stetig weiterzuentwickeln?',
+    'Du kannst dir vorstellen in einer Performance Marketing Agentur zu arbeiten und hast Lust dich und deine Expertise im Bereich Leadgen in spannenden Projekten einzubringen und stetig weiterzuentwickeln?',
   ctaLead:
-    'Dann mach unseren kurzen Online-Bewerber-Test und finde heraus, ob du zu uns und wir zu dir passen:',
-  ctaLabel: 'Hier geht´s zum TEST →',
+    'Mache jetzt unseren kurzen Online Bewerber-Test und finde heraus, ob du zu uns und wir zu dir passen:',
+  ctaLabel: "Hier geht's zum TEST",
 };
 
 export const jobInfo = {
   location: 'Saarbrücken',
   remote: 'Homeoffice möglich',
   hours: '32–40 h pro Woche',
-  description:
-    'Paid Media ist dein Ding? Dann verstärke unser Team und skaliere Performance-Kampagnen für spannende Kunden. Jetzt bewerben!',
 };
-
-export type BenefitIcon =
-  | 'document'
-  | 'screen'
-  | 'shield'
-  | 'lightbulb'
-  | 'laptop'
-  | 'bike'
-  | 'chart'
-  | 'mountain'
-  | 'rocket';
-
-export const benefits: { icon: BenefitIcon; text: string }[] = [
-  { icon: 'document', text: 'Überdurchschnittlich gute Bezahlung & attraktive Prämien' },
-  { icon: 'screen', text: 'Spannende Projekte im Bereich Leadgenerierung und E-Commerce' },
-  { icon: 'shield', text: 'Zuschüsse zur betrieblichen Vorsorge, Kranken- & BU-Versicherung' },
-  { icon: 'lightbulb', text: 'Unbefristeter Arbeitsvertrag und 33 Tage Urlaub' },
-  { icon: 'laptop', text: 'Weiterentwicklung eigener Startups' },
-  { icon: 'bike', text: 'Job Bike sowie weitere Mitarbeiter-Benefits' },
-  { icon: 'chart', text: 'Remote Office: Ortsunabhängiges & flexibles Arbeiten' },
-  { icon: 'mountain', text: 'Gute Weiterbildungsmöglichkeiten durch Seminare und Coachings' },
-  { icon: 'rocket', text: 'Gute Aufstiegsmöglichkeiten' },
+export const benefits: string[] = [
+  'Überdurchschnittlich gute Bezahlung & attraktive Prämien',
+  'Spannende Projekte im Bereich Leadgenerierung und E-Commerce',
+  'Zuschüsse zur betrieblichen Vorsorge, Kranken- & BU-Versicherung',
+  'Unbefristeter Arbeitsvertrag und 33 Tage Urlaub',
+  'Weiterentwicklung eigener Startups',
+  'Job Bike sowie weitere Mitarbeiter-Benefits',
+  'Remote Office: Ortsunabhängiges & flexibles Arbeiten',
+  'Gute Weiterbildungsmöglichkeiten durch Seminare und Coachings',
+  'Gute Aufstiegsmöglichkeiten',
 ];
 
 export const jobDetails = [
+  {
+    id: 'unternehmen',
+    title: 'Dein neues Unternehmen',
+    body: 'Wir, das Team der PPC GmbH haben uns ganz dem Performance-Marketing verschrieben. Mit Leidenschaft betreuen wir eine Vielzahl an großen, internationalen Kunden sowie KMUs und Startups. Wir suchen jemanden, der unsere Leidenschaft teilt und den Erfolg unserer Kunden positiv beeinflussen will und kann!',
+  },
+  {
+    id: 'arbeitsort',
+    title: 'Dein Arbeitsort',
+    body: 'Unser Büro befindet sich im Herzen Saarbrückens. Arbeiten kannst du auch gerne vom Mond. Hauptsache dein WLAN funktioniert.',
+  },
+  {
+    id: 'kollegen',
+    title: 'Deine Arbeitskollegen',
+    body: 'Dein neues Team bietet dir eine offene Arbeitsatmosphäre zum Wohlfühlen. Wir zeichnen uns besonders durch flache Hierarchien in einem jungen, offenen Team und regelmäßigen Afterwork-Events aus.',
+  },
   {
     id: 'aufgaben',
     title: 'Deine Aufgaben',
@@ -88,3 +89,31 @@ export const finalCta = {
   heading: 'Finde heraus, ob wir zusammenpassen',
   label: '→ Jetzt Online-Test starten',
 };
+
+export const processHeading = 'Dein Weg zu uns';
+
+export const processSteps: {
+  number: string;
+  title: string;
+  body: string;
+  icon: 'clipboard' | 'contact' | 'rocket';
+}[] = [
+  {
+    number: '01',
+    title: 'Nimm an unserem Test teil',
+    body: 'Kurzer Test, ca. 3 Minuten – zeig uns, was du kannst.',
+    icon: 'clipboard',
+  },
+  {
+    number: '02',
+    title: 'Kontaktdaten hinterlassen',
+    body: 'Wenn du zu unserem Anforderungsprofil passt, kannst du uns deine Kontaktdaten hinterlassen und wir melden uns bei dir.',
+    icon: 'contact',
+  },
+  {
+    number: '03',
+    title: 'Gespräch & Start',
+    body: 'Wenn alles passt, kannst du nach einem erfolgreichen Gespräch online oder bei uns im Haus… sofort bei uns im Team anfangen.',
+    icon: 'rocket',
+  },
+];

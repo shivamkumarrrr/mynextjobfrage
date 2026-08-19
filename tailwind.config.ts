@@ -51,7 +51,7 @@ export default {
       },
       maxWidth: {
         content: '640px',
-        shell: '1200px',
+        shell: '1300px',
         page: '580px',
       },
       keyframes: {
@@ -67,6 +67,10 @@ export default {
           from: { opacity: '0', transform: 'translateY(12px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        iconPop: {
+          from: { opacity: '0', transform: 'scale(0.5)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -80,6 +84,7 @@ export default {
         screenIn: 'screenIn 0.28s ease both',
         answerIn: 'answerIn 0.42s cubic-bezier(0.22,0.9,0.32,1) backwards',
         fadeSlideUp: 'fadeSlideUp 0.5s cubic-bezier(0.22,0.9,0.32,1) both',
+        iconPop: 'iconPop 0.45s cubic-bezier(0.34,1.56,0.64,1) both',
         'accordion-down': 'accordion-down 0.35s cubic-bezier(0.4,0,0.2,1)',
         'accordion-up': 'accordion-up 0.35s cubic-bezier(0.4,0,0.2,1)',
       },

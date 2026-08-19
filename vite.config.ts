@@ -44,7 +44,10 @@ function rootStaticDirs(dirs: string[]): Plugin {
         const rel = decodeURIComponent(url.slice(1));
         const file = path.join(rootDir, rel);
         if (!file.startsWith(path.join(rootDir, match)) || !fs.existsSync(file)) return next();
-        res.setHeader('Content-Type', mime[path.extname(file).toLowerCase()] || 'application/octet-stream');
+        res.setHeader(
+          'Content-Type',
+          mime[path.extname(file).toLowerCase()] || 'application/octet-stream'
+        );
         res.setHeader('Cache-Control', 'no-cache');
         res.end(fs.readFileSync(file));
       });

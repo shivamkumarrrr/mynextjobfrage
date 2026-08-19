@@ -10,8 +10,8 @@ import { jobDetails } from './content';
 export function JobDetails() {
   return (
     <section className="px-5 pb-12 md:px-10 md:pb-14">
-      <div className="mx-auto max-w-page">
-        <h2 className="mt-1.5 font-display text-[1.35rem] font-extrabold tracking-[-0.2px] text-primary">
+      <div className="mx-auto max-w-shell">
+        <h2 className="mt-1.5 font-display text-2xl font-bold tracking-[-0.03em] text-primary md:text-3xl">
           Alles zum Job
         </h2>
         <Accordion type="single" collapsible className="mt-6 flex flex-col gap-2.5">

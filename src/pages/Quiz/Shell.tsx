@@ -126,12 +126,12 @@ export function Shell({ config, phase, percent, progressText, children }: ShellP
         </div>
       </header>
 
-      <div className="mx-auto grid w-full max-w-shell flex-1 grid-cols-1 gap-7 px-3.5 pb-12 pt-6 sm:px-5 md:grid-cols-[210px_minmax(0,1fr)_260px] md:gap-10 md:pb-16 md:pt-7">
+      <div className="mx-auto grid w-full max-w-shell flex-1 grid-cols-1 gap-7 px-3.5 pb-12 pt-6 sm:px-5 md:grid-cols-[210px_minmax(0,1fr)_310px] md:gap-10 md:pb-16 md:pt-7">
         <aside className="hidden md:block">
           <Steps config={config} phase={phase} />
         </aside>
 
-        <main className="mx-auto w-full min-w-0 max-w-content md:max-w-[680px]">
+        <main className="relative mx-auto w-full min-w-0 max-w-content md:max-w-[740px]">
           <div className="mb-5 w-full md:hidden">
             <Progress
               value={percent}
@@ -145,17 +145,17 @@ export function Shell({ config, phase, percent, progressText, children }: ShellP
         </main>
 
         <aside className="hidden md:block">
-          <div className="sticky top-[calc(var(--header-h)+12px)] rounded-[14px] border border-border bg-surface p-5">
-            <div className="mb-2.5 text-[17px] font-bold leading-tight text-primary">
+          <div className="sticky top-[calc(var(--header-h)+12px)] rounded-[14px] border border-border bg-surface p-6">
+            <div className="mb-2.5 text-[18px] font-bold leading-tight text-primary">
               {job.title || ''}
             </div>
-            <div className="mb-[18px] flex items-center gap-2 text-sm font-medium text-muted">
-              <span className="inline-flex h-[26px] w-[26px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-card">
+            <div className="mb-[18px] flex items-center gap-2 text-[15px] font-medium text-muted">
+              <span className="inline-flex h-[28px] w-[28px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-card">
                 <Logo config={config} className="h-full w-full rounded-none" />
               </span>
               {job.company || ''}
             </div>
-            <div className="mb-2.5 text-[13px] font-semibold uppercase tracking-wider text-muted">
+            <div className="mb-3 text-[14px] font-semibold uppercase tracking-wider text-muted">
               {config.progressLabel || 'Dein Fortschritt'}
             </div>
             <Progress
@@ -163,7 +163,7 @@ export function Shell({ config, phase, percent, progressText, children }: ShellP
               active={inFlight}
               aria-label={`${config.progressLabel || 'Fortschritt'} ${percent}%`}
             />
-            <div className="mt-2 flex justify-between text-[13px] font-semibold text-muted">
+            <div className="mt-2.5 flex justify-between text-[14px] font-semibold text-muted">
               <span>{progressText}</span>
               <span className="text-primary">{percent}%</span>
             </div>

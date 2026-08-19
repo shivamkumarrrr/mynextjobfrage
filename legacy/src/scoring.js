@@ -89,6 +89,3 @@ function evaluateRule(rule, answersById) {
   const chosen = Array.isArray(answer.answerIndex) ? answer.answerIndex : [answer.answerIndex];
   return indices.some((i) => chosen.includes(i));
 }
-
-
-

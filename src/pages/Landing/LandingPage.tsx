@@ -3,6 +3,8 @@ import { FinalCta } from './FinalCta';
 import { Footer } from './Footer';
 import { Hero } from './Hero';
 import { JobDetails } from './JobDetails';
+import { ProcessSteps } from './ProcessSteps';
+import { StickyMobileCta } from './StickyMobileCta';
 import { Team } from './Team';
 
 /**
@@ -14,10 +16,12 @@ export function LandingPage() {
     <>
       <Hero />
       <Benefits />
+      <ProcessSteps />
       <JobDetails />
       <Team />
       <FinalCta />
       <Footer />
+      <StickyMobileCta />
     </>
   );
 }

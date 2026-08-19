@@ -84,14 +84,7 @@ describe.each(['ppc-performance-marketing', 'moebel-verkauf'])('%s payload parit
       meta: testMeta,
       result,
     });
-    const legacy = legacyPayload(
-      config,
-      quizId,
-      null,
-      answers,
-      false,
-      result.rejectionReason
-    );
+    const legacy = legacyPayload(config, quizId, null, answers, false, result.rejectionReason);
 
     expect(signature(ported)).toBe(signature(legacy));
     expect(ported.candidate).toBeNull();

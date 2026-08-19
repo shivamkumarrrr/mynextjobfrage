@@ -39,7 +39,12 @@ export function ShareButtons({ config, target, text }: ShareButtonsProps) {
       href: `https://www.facebook.com/sharer/sharer.php?u=${enc(target)}`,
       className: 'bg-[#1877f2]',
     },
-  ].filter(Boolean) as { key: keyof typeof PATHS; label: string; href: string; className: string }[];
+  ].filter(Boolean) as {
+    key: keyof typeof PATHS;
+    label: string;
+    href: string;
+    className: string;
+  }[];
 
   if (!buttons.length) return null;
 

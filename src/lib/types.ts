@@ -23,6 +23,7 @@ export interface Question {
   placeholder?: string;
   hint?: string;
   points?: number | null;
+  image?: string;
 }
 
 export interface Category {

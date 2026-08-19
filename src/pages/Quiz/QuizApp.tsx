@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useReducer, useRef } from 'react';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { applyBranding, applyMeta } from '@/lib/branding';
 import { initEmbed } from '@/lib/embed';
 import { evaluateQuiz } from '@/lib/scoring';
@@ -20,6 +21,15 @@ import { Question } from './screens/Question';
 import { Rejection } from './screens/Rejection';
 import { ThankYou } from './screens/ThankYou';
 import { Welcome } from './screens/Welcome';
+
+// The quiz only ever moves forward (no back button, see machine.ts), so a
+// single left-slide direction reads as progress rather than needing to track
+// which way the user came from.
+const slideVariants = {
+  initial: { opacity: 0, x: 24 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -24 },
+};
 
 function detectDevice(): string {
   const ua = navigator.userAgent || '';
@@ -114,7 +124,12 @@ export function QuizApp() {
   );
 
   const send = useCallback(
-    (config: QuizConfig, result: QuizResult, answers: AnswerRecord[], candidate: Candidate | null) => {
+    (
+      config: QuizConfig,
+      result: QuizResult,
+      answers: AnswerRecord[],
+      candidate: Candidate | null
+    ) => {
       const payload = buildPayload(config, {
         quizId: quizIdRef.current,
         candidate,
@@ -171,6 +186,7 @@ export function QuizApp() {
   const config = state.config;
   const questions = config.questions || [];
   const question = questions[state.qIndex];
+  const screenKey = state.screen === 'question' ? `question-${state.qIndex}` : state.screen;
 
   return (
     <Shell
@@ -179,25 +195,37 @@ export function QuizApp() {
       percent={progressPercent(state)}
       progressText={progressText(state)}
     >
-      {state.screen === 'welcome' && (
-        <Welcome config={config} onStart={() => dispatch({ type: 'start' })} />
-      )}
-      {state.screen === 'question' && question && (
-        <Question
-          key={question.id}
-          config={config}
-          question={question}
-          index={state.qIndex}
-          total={questions.length}
-          onAnswer={handleAnswer}
-        />
-      )}
-      {state.screen === 'match' && (
-        <Match config={config} onContinue={() => dispatch({ type: 'continue_to_lead' })} />
-      )}
-      {state.screen === 'rejection' && <Rejection config={config} />}
-      {state.screen === 'lead' && <Lead config={config} onSubmit={handleLeadSubmit} />}
-      {state.screen === 'thank' && <ThankYou config={config} />}
+      <MotionConfig reducedMotion="user">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={screenKey}
+            variants={slideVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.32, ease: [0.22, 0.9, 0.32, 1] }}
+          >
+            {state.screen === 'welcome' && (
+              <Welcome config={config} onStart={() => dispatch({ type: 'start' })} />
+            )}
+            {state.screen === 'question' && question && (
+              <Question
+                config={config}
+                question={question}
+                index={state.qIndex}
+                total={questions.length}
+                onAnswer={handleAnswer}
+              />
+            )}
+            {state.screen === 'match' && (
+              <Match config={config} onContinue={() => dispatch({ type: 'continue_to_lead' })} />
+            )}
+            {state.screen === 'rejection' && <Rejection config={config} />}
+            {state.screen === 'lead' && <Lead config={config} onSubmit={handleLeadSubmit} />}
+            {state.screen === 'thank' && <ThankYou config={config} />}
+          </motion.div>
+        </AnimatePresence>
+      </MotionConfig>
     </Shell>
   );
 }

@@ -174,7 +174,7 @@ export function Lead({ config, onSubmit }: LeadProps) {
   );
 
   return (
-    <section className="animate-screenIn">
+    <section>
       <h2 className="mb-1.5 text-[1.45rem] font-bold text-primary" tabIndex={-1} data-focus>
         {lf.heading || 'Deine Kontaktdaten'}
       </h2>

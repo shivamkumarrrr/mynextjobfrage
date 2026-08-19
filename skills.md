@@ -2,15 +2,15 @@
 
 ## 1. Core Skills Required
 
-| Skill | Level | Why |
-|-------|-------|-----|
-| **JavaScript (ES6+)** | Advanced | Core engine, DOM manipulation, async, state management |
-| **CSS3 + Flexbox** | Proficient | Mobile‑first, CSS variables, animations, responsive design |
-| **HTML5 / Semantics** | Proficient | Accessibility, form handling, iframe embedding |
-| **JSON** | Basic | Config authoring and validation |
-| **Git** | Basic | Version control for configs |
-| **Webhook / REST APIs** | Basic | Sending POST requests with retry logic |
-| **Figma / Sketch** | Nice‑to‑have | Creating component mockups for client approvals |
+| Skill                   | Level        | Why                                                        |
+| ----------------------- | ------------ | ---------------------------------------------------------- |
+| **JavaScript (ES6+)**   | Advanced     | Core engine, DOM manipulation, async, state management     |
+| **CSS3 + Flexbox**      | Proficient   | Mobile‑first, CSS variables, animations, responsive design |
+| **HTML5 / Semantics**   | Proficient   | Accessibility, form handling, iframe embedding             |
+| **JSON**                | Basic        | Config authoring and validation                            |
+| **Git**                 | Basic        | Version control for configs                                |
+| **Webhook / REST APIs** | Basic        | Sending POST requests with retry logic                     |
+| **Figma / Sketch**      | Nice‑to‑have | Creating component mockups for client approvals            |
 
 ## 2. Development Environment
 
@@ -21,12 +21,12 @@
 
 ## 3. Testing Strategy
 
-| Test Type | Coverage | Tools |
-|-----------|----------|-------|
-| **Unit tests** | Scoring engine, knockout evaluator | Node `node:test` via `npm test` |
-| **Integration** | Webhook delivery (mocked) | Postman / curl |
-| **End‑to‑end** | Full quiz flow (desktop + mobile) | Playwright / Cypress (optional) |
-| **Manual QA** | Branding, responsiveness, form validation | Browser DevTools |
+| Test Type       | Coverage                                  | Tools                           |
+| --------------- | ----------------------------------------- | ------------------------------- |
+| **Unit tests**  | Scoring engine, knockout evaluator        | Node `node:test` via `npm test` |
+| **Integration** | Webhook delivery (mocked)                 | Postman / curl                  |
+| **End‑to‑end**  | Full quiz flow (desktop + mobile)         | Playwright / Cypress (optional) |
+| **Manual QA**   | Branding, responsiveness, form validation | Browser DevTools                |
 
 ## 4. Deployment Checklist
 
@@ -51,14 +51,14 @@
 
 ## 6. Common Pitfalls & Solutions
 
-| Pitfall | Solution |
-|---------|----------|
-| Webhook not receiving data | Check CORS, network tab; enable retry logic |
-| Iframe height jumps | Ensure `postMessage` sent on every render; parent listens |
-| Multi‑select "Keinem" not exclusive | Use JavaScript to uncheck others on change |
-| Brand colours not applying | Verify CSS variable names match JSON keys |
-| Auto‑advance feels too slow/fast | Adjust `setTimeout` duration (280ms recommended) |
-| Scores not calculating correctly | Verify category weights sum to 1.0; normalise per‑category averages |
+| Pitfall                             | Solution                                                            |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| Webhook not receiving data          | Check CORS, network tab; enable retry logic                         |
+| Iframe height jumps                 | Ensure `postMessage` sent on every render; parent listens           |
+| Multi‑select "Keinem" not exclusive | Use JavaScript to uncheck others on change                          |
+| Brand colours not applying          | Verify CSS variable names match JSON keys                           |
+| Auto‑advance feels too slow/fast    | Adjust `setTimeout` duration (280ms recommended)                    |
+| Scores not calculating correctly    | Verify category weights sum to 1.0; normalise per‑category averages |
 
 ## 7. Future Skill Extensions
 

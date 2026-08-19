@@ -1,14 +1,7 @@
 import type { AnswerRecord, QuizConfig, QuizResult } from '@/lib/types';
 
 export type Screen =
-  | 'loading'
-  | 'welcome'
-  | 'question'
-  | 'match'
-  | 'rejection'
-  | 'lead'
-  | 'thank'
-  | 'fatal';
+  'loading' | 'welcome' | 'question' | 'match' | 'rejection' | 'lead' | 'thank' | 'fatal';
 
 export interface FatalInfo {
   /** Pre-authored copy from this module only — never user input. */
@@ -48,7 +41,7 @@ export const initialState: QuizState = {
 export function quizReducer(state: QuizState, action: QuizAction): QuizState {
   switch (action.type) {
     case 'config_loaded':
-      return { ...state, config: action.config, screen: 'welcome' };
+      return { ...state, config: action.config, screen: 'question', qIndex: 0 };
     case 'fatal':
       return { ...state, screen: 'fatal', fatal: action.fatal };
     case 'start':

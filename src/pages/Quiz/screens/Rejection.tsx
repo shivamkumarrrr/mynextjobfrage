@@ -23,7 +23,7 @@ export function Rejection({ config }: RejectionProps) {
     `Schau dir diese Stelle an: ${config.job && config.job.title} bei ${config.job && config.job.company}`;
 
   return (
-    <section className="animate-screenIn pt-4 text-center">
+    <section className="pt-4 text-center">
       <div className="mx-auto mb-5 h-[84px] w-[84px]">
         <svg viewBox="0 0 52 52" aria-hidden="true" className="block h-full w-full">
           <circle className="rejection-circle" cx="26" cy="26" r="24" fill="none" />

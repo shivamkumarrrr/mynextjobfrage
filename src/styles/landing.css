@@ -11,23 +11,41 @@
   Values measured from the real PPC logo file — not a guess.
 */
 :root {
-  --primary: #382e4a;
-  --primary-hover: #2c243b;
-  --accent: #ff5200;
-  --accent-hover: #e04800;
-  --accent-deep: #cc4200;
+  --primary: #222222;
+  --primary-hover: #000000;
+  --accent: #ff8c00;
+  --accent-hover: #e67e00;
+  --accent-deep: #e67e00;
 
-  --bg: #f5f6f8;
-  --text: #211c2c;
-  --muted: #6b6478;
-  --border: #e2dfe8;
+  --bg: #f5f5f5;
+  --text: #333333;
+  --muted: #666666;
+  --border: #dcdcdc;
   --card-bg: #ffffff;
-  --surface: #f5f6f8;
+  --surface: #f5f5f5;
 
   --radius: 10px;
   --radius-sm: 8px;
   --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
   --font-display: 'Montserrat', var(--font);
+
+  /* Typography scale — inspired by Lovable/CodeRabbit */
+  --text-display: 3rem;
+  --text-display-md: 3.75rem;
+  --text-display-lg: 4.5rem;
+  --text-heading: 2rem;
+  --text-heading-md: 2.5rem;
+  --text-subheading: 1.25rem;
+  --text-body: 1rem;
+  --text-body-lg: 1.125rem;
+  --text-muted: 0.875rem;
+  --text-small: 0.8125rem;
+  --text-xs: 0.75rem;
+
+  /* Letter spacing — tighter for headings, normal for body */
+  --tracking-tight: -0.03em;
+  --tracking-normal: -0.01em;
+  --tracking-wide: 0.05em;
 }
 
 @layer base {
@@ -61,56 +79,6 @@
   single DOM node across two different track layouts.
 */
 @layer components {
-  .hero-grid {
-    grid-template-areas:
-      'logo'
-      'tagline'
-      'title'
-      'jobinfo'
-      'photo'
-      'intro'
-      'ctalead'
-      'cta';
-  }
-
-  @media (min-width: 768px) {
-    .hero-grid {
-      grid-template-columns: 1.4fr 1fr;
-      grid-template-areas:
-        'photo logo'
-        'photo tagline'
-        'photo title'
-        'photo jobinfo'
-        'photo intro'
-        'photo ctalead'
-        'photo cta';
-    }
-  }
-
-  .area-logo {
-    grid-area: logo;
-  }
-  .area-tagline {
-    grid-area: tagline;
-  }
-  .area-title {
-    grid-area: title;
-  }
-  .area-jobinfo {
-    grid-area: jobinfo;
-  }
-  .area-photo {
-    grid-area: photo;
-  }
-  .area-intro {
-    grid-area: intro;
-  }
-  .area-ctalead {
-    grid-area: ctalead;
-  }
-  .area-cta {
-    grid-area: cta;
-  }
 }
 
 /* Scroll-reveal: elements start hidden and animate once observed. */
@@ -137,5 +105,64 @@
   .reveal.reveal-in {
     animation: none;
     opacity: 1;
+  }
+}
+
+/* Room for the sticky mobile CTA bar so it never covers the footer content. */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 84px;
+  }
+}
+
+/* Hero title coloring animation */
+.hero-title-highlight {
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--accent) 50%,
+    var(--primary) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colorShift 3s ease-in-out infinite;
+}
+
+@keyframes colorShift {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* Logo coloring animation — purple + orange hue shift */
+.hero-logo-highlight {
+  animation: logoHueShift 4s ease-in-out infinite;
+}
+
+@keyframes logoHueShift {
+  0%,
+  100% {
+    filter: hue-rotate(260deg) saturate(1.2);
+  }
+  50% {
+    filter: hue-rotate(20deg) saturate(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-highlight {
+    animation: none;
+    -webkit-text-fill-color: var(--primary);
+    background: none;
+  }
+  .hero-logo-highlight {
+    animation: none;
+    filter: none;
   }
 }

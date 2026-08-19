@@ -19,7 +19,7 @@ export function Match({ config, onContinue }: MatchProps) {
     'Dein Profil passt richtig gut zu dieser Stelle. Nur noch ein Schritt: Hinterlasse deine Kontaktdaten, damit wir uns bei dir melden können.';
 
   return (
-    <section className="animate-screenIn pt-4 text-center">
+    <section className="pt-4 text-center">
       <div className="mx-auto mb-5 h-[84px] w-[84px]">
         <svg viewBox="0 0 52 52" aria-hidden="true" className="block h-full w-full">
           <circle className="match-ring match-ring-outer" cx="26" cy="26" r="24" fill="none" />

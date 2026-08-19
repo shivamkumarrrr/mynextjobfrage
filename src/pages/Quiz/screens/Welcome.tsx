@@ -1,3 +1,4 @@
+import { ImageWithFallback } from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
 import type { QuizConfig } from '@/lib/types';
 
@@ -12,23 +13,36 @@ export function Welcome({ config, onStart }: WelcomeProps) {
   const welcome = config.welcome || {};
 
   return (
-    <section className="mx-auto max-w-[520px] animate-screenIn pt-3 text-center">
+    <section className="mx-auto max-w-[520px] pt-3 text-center">
+      {branding.heroImage && (
+        <div className="mx-auto mb-5 max-w-[420px] animate-fadeSlideUp overflow-hidden rounded-brand">
+          <ImageWithFallback
+            src={branding.heroImage}
+            alt=""
+            fallbackLabel={job.company || 'Foto'}
+            loading="lazy"
+            className="block aspect-video w-full object-cover"
+            fallbackClassName="aspect-video"
+          />
+        </div>
+      )}
       {branding.logoUrl && (
         <img
           className="mx-auto mb-[18px] block max-h-12 w-auto animate-fadeSlideUp"
+          style={{ animationDelay: '80ms' }}
           src={branding.logoUrl}
           alt={job.company || ''}
         />
       )}
       <p
-        className="mb-2 animate-fadeSlideUp text-[13px] font-bold uppercase tracking-[0.08em] text-accent"
-        style={{ animationDelay: '140ms' }}
+        className="mb-2 animate-fadeSlideUp text-[13px] font-bold uppercase tracking-[0.08em] text-accent-deep"
+        style={{ animationDelay: '160ms' }}
       >
         {config.topbarLabel || 'Online-Test'}
       </p>
       <h1
         className="mb-1.5 animate-fadeSlideUp text-[clamp(1.5rem,4.5vw,2.05rem)] font-bold leading-tight text-primary"
-        style={{ animationDelay: '200ms' }}
+        style={{ animationDelay: '220ms' }}
         tabIndex={-1}
         data-focus
       >
@@ -36,19 +50,19 @@ export function Welcome({ config, onStart }: WelcomeProps) {
       </h1>
       <p
         className="mb-4 animate-fadeSlideUp font-semibold text-text"
-        style={{ animationDelay: '260ms' }}
+        style={{ animationDelay: '280ms' }}
       >
         {job.company || ''}
       </p>
       <p
         className="mx-auto mb-[18px] max-w-[480px] animate-fadeSlideUp text-[1.05rem] text-muted"
-        style={{ animationDelay: '320ms' }}
+        style={{ animationDelay: '340ms' }}
       >
         {welcome.intro || ''}
       </p>
       <p
         className="mb-[26px] animate-fadeSlideUp text-sm text-muted"
-        style={{ animationDelay: '380ms' }}
+        style={{ animationDelay: '400ms' }}
       >
         {welcome.metaText || 'Dauer: ca. 5 Minuten'}
       </p>
@@ -56,7 +70,7 @@ export function Welcome({ config, onStart }: WelcomeProps) {
         type="button"
         size="lg"
         className="min-w-[220px] animate-fadeSlideUp"
-        style={{ animationDelay: '440ms' }}
+        style={{ animationDelay: '460ms' }}
         onClick={onStart}
       >
         {welcome.startButton || 'Online-Test starten'}
