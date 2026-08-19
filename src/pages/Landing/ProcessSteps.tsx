@@ -33,18 +33,18 @@ export function ProcessSteps() {
         </motion.h2>
 
         <div className="relative mt-12">
-          {/* Desktop: inline arrows */}
+          {/* Desktop: equal-width columns with arrows */}
           <motion.div
-            className="hidden flex-col gap-8 md:flex md:flex-row md:items-stretch md:justify-between"
+            className="hidden flex-col gap-8 md:flex md:flex-row md:items-stretch"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
             variants={containerVariants}
           >
             {processSteps.map((step, idx) => (
-              <div key={step.number} className="flex items-center gap-3">
+              <div key={step.number} className="relative flex w-1/3 flex-col items-center">
                 <motion.div
-                  className="group relative flex flex-col gap-3"
+                  className="group relative flex flex-col items-center gap-3 text-center"
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -56,7 +56,7 @@ export function ProcessSteps() {
                   <p className="text-[14px] leading-relaxed text-muted">{step.body}</p>
                 </motion.div>
                 {idx < processSteps.length - 1 && (
-                  <div className="flex shrink-0 items-center text-2xl font-bold text-accent">→</div>
+                  <div className="absolute -right-6 top-5 text-2xl font-bold text-accent">→</div>
                 )}
               </div>
             ))}
