@@ -54,7 +54,7 @@ export function quizReducer(state: QuizState, action: QuizAction): QuizState {
         ...state,
         answers: action.answers,
         result: action.result,
-        screen: action.result.passed ? 'match' : 'rejection',
+        screen: action.result.passed ? 'lead' : 'rejection',
       };
     case 'continue_to_lead':
       return { ...state, screen: 'lead' };
