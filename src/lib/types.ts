@@ -70,6 +70,8 @@ export interface LeadFormConfig {
   whatsappOptIn?: boolean | string;
   privacyNote?: string;
   fields?: LeadField[];
+  cvUpload?: boolean;
+  certificatesUpload?: boolean;
 }
 
 export interface Branding {
@@ -151,6 +153,14 @@ export interface KnockoutFlagResult {
   triggered: boolean;
 }
 
+export interface FileAttachment {
+  filename: string;
+  mimeType: string;
+  sizeBytes: number;
+  /** Base64-encoded file content (no `data:` URL prefix). */
+  data: string;
+}
+
 export interface Candidate {
   salutation: string;
   firstName: string;
@@ -161,6 +171,8 @@ export interface Candidate {
   startDate: string;
   message: string;
   whatsappOptIn: boolean;
+  cv?: FileAttachment | null;
+  certificates?: FileAttachment[];
 }
 
 export interface PayloadMeta {
