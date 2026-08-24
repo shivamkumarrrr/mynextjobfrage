@@ -286,7 +286,7 @@
     "submitLabel": "Bewerbung absenden ›",
     "salutation": true,
     "salutationLabel": "Anrede",
-    "whatsappOptIn": "Benachrichtigungen über WhatsApp erhalten (optional)",
+    "whatsappOptIn": "* Ich stimme der Datenschutzerklärung und Kontaktaufnahme zu (Widerruf jederzeit möglich)",
     "privacyNote": "Deine Daten werden ausschließlich zur Bearbeitung deiner Bewerbung verwendet und gemäß DSGVO vertraulich behandelt.",
     "fields": [
       {

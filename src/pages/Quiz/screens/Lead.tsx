@@ -185,10 +185,12 @@ export function buildFieldRows(fields: LeadField[]): LeadField[][] {
 }
 
 /** Zod schema derived from the client's JSON field list. */
-function buildSchema(fields: LeadField[]) {
+function buildSchema(fields: LeadField[], optInRequired: boolean) {
   const shape: Record<string, z.ZodTypeAny> = {
     salutation: z.string().optional(),
-    whatsappOptIn: z.boolean().optional(),
+    whatsappOptIn: optInRequired
+      ? z.boolean().refine((v) => v === true, { message: 'Bitte bestätige die Zustimmung' })
+      : z.boolean().optional(),
   };
 
   for (const field of fields) {
@@ -229,7 +231,10 @@ export function Lead({ config, onSubmit }: LeadProps) {
   const matchHeadline = (config.scoring && config.scoring.matchScreen?.headline) || 'Volltreffer!';
   const fields = useMemo(() => lf.fields || [], [lf.fields]);
   const rows = useMemo(() => buildFieldRows(fields), [fields]);
-  const schema = useMemo(() => buildSchema(fields), [fields]);
+  const schema = useMemo(
+    () => buildSchema(fields, Boolean(lf.whatsappOptIn)),
+    [fields, lf.whatsappOptIn]
+  );
 
   const defaultValues = useMemo(() => {
     const values: Record<string, string | boolean> = {

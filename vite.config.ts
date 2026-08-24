@@ -95,7 +95,11 @@ export default defineConfig({
   // 'mpa' keeps unknown paths from falling back to index.html, which would
   // silently serve the job ad in place of the quiz.
   appType: 'mpa',
-  plugins: [react(), cleanUrls(['app']), rootStaticDirs(['quizzes', 'assets'])],
+  plugins: [
+    react(),
+    cleanUrls(['app', 'impressum', 'datenschutz']),
+    rootStaticDirs(['quizzes', 'assets']),
+  ],
   resolve: {
     alias: { '@': path.resolve(rootDir, 'src') },
   },
@@ -107,6 +111,8 @@ export default defineConfig({
       input: {
         index: path.resolve(rootDir, 'index.html'),
         app: path.resolve(rootDir, 'app.html'),
+        impressum: path.resolve(rootDir, 'impressum.html'),
+        datenschutz: path.resolve(rootDir, 'datenschutz.html'),
       },
     },
   },
