@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, MotionConfig } from 'framer-motion';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
 import { JobInfoCard } from './JobInfoCard';
@@ -83,9 +83,24 @@ export function Hero() {
             </motion.p>
 
             <motion.div variants={itemVariants}>
-              <Button asChild size="pill" className="gap-1.5 text-sm">
-                <a href={QUIZ_LINK}>{hero.ctaLabel}</a>
-              </Button>
+              <MotionConfig reducedMotion="user">
+                <motion.div
+                  className="inline-block rounded-full"
+                  animate={{
+                    scale: [1, 1.04, 1],
+                    boxShadow: [
+                      '0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent)',
+                      '0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent)',
+                      '0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent)',
+                    ],
+                  }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                >
+                  <Button asChild size="pill" className="gap-1.5 text-sm">
+                    <a href={QUIZ_LINK}>{hero.ctaLabel}</a>
+                  </Button>
+                </motion.div>
+              </MotionConfig>
             </motion.div>
           </motion.div>
         </div>

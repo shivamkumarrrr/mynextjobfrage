@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, MotionConfig } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { QUIZ_LINK, finalCta } from './content';
 
@@ -35,9 +35,24 @@ export function FinalCta() {
           {finalCta.heading}
         </motion.h2>
         <motion.div variants={itemVariants}>
-          <Button asChild size="pill" className="mt-5 gap-1.5 px-7 py-3.5 text-[15px]">
-            <a href={QUIZ_LINK}>{finalCta.label}</a>
-          </Button>
+          <MotionConfig reducedMotion="user">
+            <motion.div
+              className="mt-5 inline-block rounded-full"
+              animate={{
+                scale: [1, 1.04, 1],
+                boxShadow: [
+                  '0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent)',
+                  '0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent)',
+                  '0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent)',
+                ],
+              }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            >
+              <Button asChild size="pill" className="gap-1.5 px-7 py-3.5 text-[15px]">
+                <a href={QUIZ_LINK}>{finalCta.label}</a>
+              </Button>
+            </motion.div>
+          </MotionConfig>
         </motion.div>
       </motion.div>
     </section>
