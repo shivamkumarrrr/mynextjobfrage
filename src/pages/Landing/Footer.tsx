@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { company } from './content';
 
 const LINKEDIN_URL = 'https://www.linkedin.com/company/ppc-gmbh/posts/';
@@ -6,37 +7,46 @@ const LINKEDIN_PATH =
 
 export function Footer() {
   return (
-    <footer className="bg-primary px-5 py-8 text-center md:p-10">
-      <div className="mx-auto max-w-page">
+    <footer className="bg-primary px-5 py-10 text-center md:p-12">
+      <motion.div
+        className="mx-auto max-w-page"
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <p className="text-sm font-bold text-white">{company.name}</p>
-        <p className="mt-1 text-[13px] leading-normal text-white/45">{company.address}</p>
+        <p className="mt-1.5 text-[13px] leading-normal text-white/45">{company.address}</p>
         <p className="text-[13px] leading-normal text-white/45">{company.phone}</p>
-        <div className="mt-4 flex items-center justify-center gap-6">
+
+        <a
+          className="mt-5 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/8 text-white/60 transition-colors duration-200 hover:bg-accent hover:text-white"
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="PPC GmbH auf LinkedIn"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+            <path d={LINKEDIN_PATH} fill="currentColor" />
+          </svg>
+        </a>
+
+        <div className="mx-auto mt-6 flex max-w-[200px] items-center justify-center gap-3 border-t border-white/10 pt-5">
           <a
             className="text-xs font-medium tracking-[0.2px] text-white/50 no-underline transition-colors hover:text-white"
             href="/impressum"
           >
             Impressum
           </a>
+          <span className="h-[3px] w-[3px] shrink-0 rounded-full bg-white/25" aria-hidden="true" />
           <a
             className="text-xs font-medium tracking-[0.2px] text-white/50 no-underline transition-colors hover:text-white"
             href="/datenschutz"
           >
             Datenschutz
           </a>
-          <a
-            className="text-white/50 transition-colors hover:text-white"
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="PPC GmbH auf LinkedIn"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-              <path d={LINKEDIN_PATH} fill="currentColor" />
-            </svg>
-          </a>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }
