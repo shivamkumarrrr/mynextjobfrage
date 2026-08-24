@@ -338,6 +338,6 @@
   },
 
   "webhook": {
-    "url": "https://formsubmit.co/ajax/kumar@palz.consulting"
+    "url": "/api/send-email"
   }
 }
