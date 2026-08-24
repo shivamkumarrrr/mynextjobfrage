@@ -10,6 +10,18 @@ const MAX_ATTACHMENT_BYTES = 8 * 1024 * 1024;
 const MAX_ATTACHMENT_COUNT = 6; // 1 CV + up to 5 certificates
 const MAX_TOTAL_ATTACHMENT_BYTES = 20 * 1024 * 1024;
 
+/**
+ * Without this, Vercel's default body parser buffers the *entire* request
+ * body into memory before our handler — and its size checks below — ever
+ * run, so a caller could force a huge parse/allocation per request no matter
+ * what MAX_TOTAL_ATTACHMENT_BYTES says. This caps the parse itself (base64
+ * inflates the raw 20MB cap by ~4/3, plus JSON overhead) so an oversized
+ * request is rejected at the platform level, before it's fully in memory.
+ */
+export const config = {
+  api: { bodyParser: { sizeLimit: '30mb' } },
+};
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
