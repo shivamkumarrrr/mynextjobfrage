@@ -23,7 +23,6 @@ export function FinalCta() {
           <Button asChild size="lg" className="rounded-full">
             <a href={QUIZ_LINK}>{CTA_LABEL}</a>
           </Button>
-          <p className="mt-4 text-[13px] text-text/60">Ca. 5 Minuten · 16 Fragen</p>
         </motion.div>
       </div>
     </section>

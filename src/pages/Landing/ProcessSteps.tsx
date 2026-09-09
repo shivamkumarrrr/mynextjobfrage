@@ -77,11 +77,10 @@ export function ProcessSteps() {
         </motion.ol>
 
         {/* The live job ad repeats the CTA right after this section. */}
-        <div className="mt-14 flex flex-col items-center gap-3">
+        <div className="mt-14 flex justify-center">
           <Button asChild size="lg" className="rounded-full">
             <a href={QUIZ_LINK}>{CTA_LABEL}</a>
           </Button>
-          <p className="text-[13px] text-text/60">Ca. 5 Minuten · 16 Fragen</p>
         </div>
       </div>
     </section>

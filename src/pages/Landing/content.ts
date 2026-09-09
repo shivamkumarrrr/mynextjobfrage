@@ -147,7 +147,7 @@ export const processSteps: {
   {
     number: '01',
     title: 'Nimm an unserem Test teil',
-    body: 'Kurzer Test, ca. 5 Minuten – zeig uns, was du kannst.',
+    body: 'Kurzer Test – zeig uns, was du kannst.',
     icon: 'clipboard',
   },
   {
