@@ -8,7 +8,7 @@ Vanilla JS / no framework. Each client = one JSON file in `/quizzes/`. Deployabl
 
 ## Non-negotiables implemented
 
-- **No scoring shown to candidates.** Candidates only ever see: Welcome → Questions → Lead form → "Vielen Dank". All scoring/tier/knockout data goes into the **internal webhook payload**.
+- **No scoring shown to candidates.** Candidates only ever see: Questions → Lead form → "Vielen Dank". All scoring/tier/knockout data goes into the **internal webhook payload**.
 - **No early exits.** Every candidate completes the full quiz + form. Knockout-relevant answers are flagged internally as `knockoutFlags[]` for the recruiter to decide.
 - **Config-driven.** `GET /app?q=<quiz-id>` loads `quizzes/<quiz-id>.json`. New client = new JSON, zero code changes.
 - **Mobile-first** (375px), **DSGVO-friendly**: no cookies, no third-party scripts, no localStorage. Self-hosted, EU-hostable.
@@ -230,7 +230,7 @@ Knockouts are evaluated **after** completion and only appear as `knockoutFlags[]
    - `branding.primary` / `branding.accent` (hex), optional `branding.logoUrl`
    - `branding` may also override the design tokens `bg`, `text`, `radius`, `font` (see `design.md`)
    - `job.title`, `job.company`
-   - `welcome.*`, `leadForm.*`, `thankYou.*`
+   - `welcome.intro` (page description / og tags only — there is no welcome screen), `leadForm.*`, `thankYou.*`
 3. Set `categories` (label + weight), `tiers` (descending `min`, first row's `min` must be ≤ lowest possible total, last row's `min` must be 0). **Weights should sum to 1.0.**
 4. Add `questions[]` — every question needs `id`, `category`, `type` (`single_select` | `multi_select`), `question`, `answers[]`. Optional: `maxPoints` (multi), `exclusive` on an answer, `correctAnswer` (index) to emit `isCorrect`.
 5. Set `knockoutFlags[]`, `webhook.url` (or leave `""` to log to console).

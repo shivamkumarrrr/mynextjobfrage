@@ -109,7 +109,6 @@ interface ShellProps {
 
 export function Shell({ config, phase, percent, progressText, children }: ShellProps) {
   const job = config.job || {};
-  const steps = config.steps || [];
   const inFlight = percent > 0 && percent < 100;
 
   return (
@@ -122,30 +121,32 @@ export function Shell({ config, phase, percent, progressText, children }: ShellP
               {job.company || 'Online-Test'}
             </span>
           </div>
-          <Badge>{config.topbarLabel || steps[0]?.label || 'Online-Test'}</Badge>
+          <Badge aria-live="polite">{progressText}</Badge>
         </div>
+        {/* Hairline rail under the header: the one progress indicator every
+            breakpoint shares, so the quiz always shows where it stands. */}
+        <Progress
+          value={percent}
+          active={inFlight}
+          className="h-[3px] rounded-none bg-track"
+          indicatorClassName="rounded-none"
+          aria-label={`${config.progressLabel || 'Fortschritt'} ${percent}%`}
+        />
       </header>
 
       <div className="mx-auto grid w-full max-w-shell flex-1 grid-cols-1 gap-7 px-3.5 pb-12 pt-6 sm:px-5 md:grid-cols-[210px_minmax(0,1fr)_310px] md:gap-10 md:pb-16 md:pt-7">
         <aside className="hidden md:block">
-          <Steps config={config} phase={phase} />
+          <div className="sticky top-[calc(var(--header-h)+20px)]">
+            <Steps config={config} phase={phase} />
+          </div>
         </aside>
 
-        <main className="relative mx-auto w-full min-w-0 max-w-content md:max-w-[740px]">
-          <div className="mb-5 w-full md:hidden">
-            <Progress
-              value={percent}
-              active={inFlight}
-              className="h-1 rounded-sm bg-border"
-              indicatorClassName="rounded-sm"
-              aria-label={`${config.progressLabel || 'Fortschritt'} ${percent}%`}
-            />
-          </div>
+        <main className="relative mx-auto flex w-full min-w-0 max-w-[680px] flex-col justify-start py-2 md:min-h-[calc(100vh-var(--header-h)-6rem)] md:justify-center md:py-6">
           {children}
         </main>
 
         <aside className="hidden md:block">
-          <div className="sticky top-[calc(var(--header-h)+12px)] rounded-[14px] border border-border bg-surface p-6">
+          <div className="sticky top-[calc(var(--header-h)+20px)] rounded-[18px] border border-border bg-white p-6 shadow-[0_10px_30px_-24px_rgba(0,0,0,0.4)]">
             <div className="mb-2.5 text-[18px] font-bold leading-tight text-primary">
               {job.title || ''}
             </div>

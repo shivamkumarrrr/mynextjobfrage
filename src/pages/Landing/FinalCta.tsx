@@ -1,60 +1,31 @@
-import { motion, MotionConfig } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { QUIZ_LINK, finalCta } from './content';
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
-  },
-};
+import { SectionHeading } from './SectionHeading';
+import { CTA_LABEL, QUIZ_LINK, finalCta, sectionEyebrows } from './content';
 
 export function FinalCta() {
   return (
-    <section className="px-5 py-11 text-center md:px-10 md:py-14">
-      <motion.div
-        className="mx-auto max-w-[400px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-        variants={containerVariants}
-      >
-        <motion.h2
-          className="font-display text-2xl font-bold tracking-[-0.03em] text-primary md:text-3xl"
-          variants={itemVariants}
+    <section className="bg-[color-mix(in_srgb,var(--accent)_5%,white)] px-5 py-16 md:px-10 md:py-24">
+      <div className="mx-auto max-w-[620px] text-center">
+        <SectionHeading
+          eyebrow={sectionEyebrows.finalCta}
+          title={finalCta.heading}
+          align="center"
+        />
+        <motion.div
+          data-final-cta
+          className="mt-8"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         >
-          {finalCta.heading}
-        </motion.h2>
-        <motion.div variants={itemVariants}>
-          <MotionConfig reducedMotion="user">
-            <motion.div
-              className="mt-5 inline-block rounded-full"
-              animate={{
-                scale: [1, 1.04, 1],
-                boxShadow: [
-                  '0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent)',
-                  '0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent)',
-                  '0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent)',
-                ],
-              }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            >
-              <Button asChild size="pill" className="gap-1.5 px-7 py-3.5 text-[15px]">
-                <a href={QUIZ_LINK}>{finalCta.label}</a>
-              </Button>
-            </motion.div>
-          </MotionConfig>
+          <Button asChild size="lg" className="rounded-full">
+            <a href={QUIZ_LINK}>{CTA_LABEL}</a>
+          </Button>
+          <p className="mt-4 text-[13px] text-text/60">Ca. 5 Minuten · 16 Fragen</p>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

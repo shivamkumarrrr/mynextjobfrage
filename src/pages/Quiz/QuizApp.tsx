@@ -16,11 +16,9 @@ import {
 } from './machine';
 import { Fatal } from './screens/Fatal';
 import { Lead } from './screens/Lead';
-import { Match } from './screens/Match';
 import { Question } from './screens/Question';
 import { Rejection } from './screens/Rejection';
 import { ThankYou } from './screens/ThankYou';
-import { Welcome } from './screens/Welcome';
 
 // The quiz only ever moves forward (no back button, see machine.ts), so a
 // single left-slide direction reads as progress rather than needing to track
@@ -205,20 +203,13 @@ export function QuizApp() {
             exit="exit"
             transition={{ duration: 0.32, ease: [0.22, 0.9, 0.32, 1] }}
           >
-            {state.screen === 'welcome' && (
-              <Welcome config={config} onStart={() => dispatch({ type: 'start' })} />
-            )}
             {state.screen === 'question' && question && (
               <Question
                 config={config}
                 question={question}
-                index={state.qIndex}
-                total={questions.length}
+                positionLabel={progressText(state)}
                 onAnswer={handleAnswer}
               />
-            )}
-            {state.screen === 'match' && (
-              <Match config={config} onContinue={() => dispatch({ type: 'continue_to_lead' })} />
             )}
             {state.screen === 'rejection' && <Rejection config={config} />}
             {state.screen === 'lead' && <Lead config={config} onSubmit={handleLeadSubmit} />}

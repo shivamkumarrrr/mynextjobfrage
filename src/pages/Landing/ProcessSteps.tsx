@@ -1,11 +1,13 @@
-import { motion, MotionConfig } from 'framer-motion';
-import { processHeading, processSteps } from './content';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { SectionHeading } from './SectionHeading';
+import { CTA_LABEL, QUIZ_LINK, processHeading, processSteps, sectionEyebrows } from './content';
 import { processStepIcons } from './icons';
 
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.2 },
+    transition: { staggerChildren: 0.14 },
   },
 };
 
@@ -18,80 +20,70 @@ const itemVariants = {
   },
 };
 
+/**
+ * A timeline, not three floating text columns: one rail connects the steps
+ * (horizontal from md up, vertical below it) so the order is carried by the
+ * layout instead of by a bare "→" glyph typed between the columns.
+ */
 export function ProcessSteps() {
   return (
-    <MotionConfig reducedMotion="user">
-      <section className="bg-[color-mix(in_srgb,var(--accent)_5%,white)] px-5 pt-16 pb-12 md:px-10 md:pt-20 md:pb-14">
-        <div className="mx-auto max-w-shell">
-          <motion.h2
-            className="font-display text-2xl font-bold tracking-[-0.03em] text-primary md:text-3xl"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {processHeading}
-          </motion.h2>
+    <section className="bg-white px-5 py-16 md:px-10 md:py-24">
+      <div className="mx-auto max-w-shell">
+        <SectionHeading eyebrow={sectionEyebrows.process} title={processHeading} />
 
-          <div className="relative mt-12">
-            {/* Desktop: equal-width columns with arrows */}
-            <motion.div
-              className="hidden flex-col gap-8 md:flex md:flex-row md:items-stretch"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
-              variants={containerVariants}
-            >
-              {processSteps.map((step, idx) => (
-                <div key={step.number} className="relative flex w-1/3 flex-col items-center">
-                  <motion.div
-                    className="group relative flex flex-col items-center gap-3 text-center"
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  >
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-accent shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
-                      {processStepIcons[step.icon]}
-                    </div>
-                    <p className="text-[15px] font-medium text-text">{step.title}</p>
-                    <p className="text-[14px] leading-relaxed text-muted">{step.body}</p>
-                  </motion.div>
-                  {idx < processSteps.length - 1 && (
-                    <div className="absolute -right-6 top-5 text-2xl font-bold text-accent">
-                      →
-                    </div>
-                  )}
+        <motion.ol
+          className="relative mt-12 grid list-none grid-cols-1 gap-8 md:grid-cols-3 md:gap-7"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={containerVariants}
+        >
+          {/* Desktop rail, fading at both ends so it reads as a path rather than
+              a border. Sits behind the badges, which carry their own background. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 top-7 hidden h-px bg-[linear-gradient(90deg,transparent_2%,color-mix(in_srgb,var(--accent)_55%,transparent)_18%,color-mix(in_srgb,var(--accent)_55%,transparent)_82%,transparent_98%)] md:block"
+          />
+
+          {processSteps.map((step, idx) => (
+            <motion.li key={step.number} className="group relative" variants={itemVariants}>
+              {/* Mobile rail segment between this badge and the next one. */}
+              {idx < processSteps.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="absolute left-7 top-14 h-[calc(100%-1.5rem)] w-px bg-[linear-gradient(180deg,color-mix(in_srgb,var(--accent)_45%,transparent),transparent)] md:hidden"
+                />
+              )}
+
+              <div className="flex items-start gap-4 md:flex-col md:items-center md:text-center">
+                <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border bg-white text-accent shadow-[0_6px_18px_-8px_rgba(0,0,0,0.35)] transition-colors duration-200 group-hover:border-accent group-hover:bg-accent group-hover:text-white">
+                  {processStepIcons[step.icon]}
+                </span>
+
+                <div className="min-w-0 md:mt-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-deep">
+                    Schritt {step.number}
+                  </p>
+                  <p className="mt-1.5 font-display text-[17px] font-bold leading-snug tracking-[-0.01em] text-primary">
+                    {step.title}
+                  </p>
+                  <p className="mx-auto mt-2 max-w-[36ch] text-[14.5px] leading-relaxed text-text/75">
+                    {step.body}
+                  </p>
                 </div>
-              ))}
-            </motion.div>
+              </div>
+            </motion.li>
+          ))}
+        </motion.ol>
 
-            {/* Mobile: stacked */}
-            <motion.div
-              className="flex flex-col gap-8 md:hidden"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
-              variants={containerVariants}
-            >
-              {processSteps.map((step) => (
-                <motion.div
-                  key={step.number}
-                  className="group relative flex flex-col gap-3"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                >
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white text-accent shadow-[0_2px_10px_rgba(0,0,0,0.06)] transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
-                    {processStepIcons[step.icon]}
-                  </div>
-                  <p className="text-[15px] font-medium text-text">{step.title}</p>
-                  <p className="text-[14px] leading-relaxed text-muted">{step.body}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+        {/* The live job ad repeats the CTA right after this section. */}
+        <div className="mt-14 flex flex-col items-center gap-3">
+          <Button asChild size="lg" className="rounded-full">
+            <a href={QUIZ_LINK}>{CTA_LABEL}</a>
+          </Button>
+          <p className="text-[13px] text-text/60">Ca. 5 Minuten · 16 Fragen</p>
         </div>
-      </section>
-    </MotionConfig>
+      </div>
+    </section>
   );
 }

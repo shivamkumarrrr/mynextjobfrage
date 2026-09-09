@@ -15,10 +15,10 @@ export function ThankYou({ config }: ThankYouProps) {
     `Ich habe mich als ${config.job && config.job.title} bei ${config.job && config.job.company} beworben!`;
 
   return (
-    <section className="pt-4 text-center">
+    <section className="rounded-[18px] border border-border bg-white p-7 text-center shadow-[0_10px_30px_-24px_rgba(0,0,0,0.45)] md:p-9">
       {branding.thankYouImage && (
         <img
-          className="mb-5 block aspect-[16/7] w-full rounded-lg object-cover md:aspect-[16/6]"
+          className="mb-6 block aspect-[16/7] w-full rounded-[14px] object-cover md:aspect-[16/6]"
           src={branding.thankYouImage}
           alt={(config.job && config.job.company) || ''}
           loading="lazy"
@@ -28,10 +28,14 @@ export function ThankYou({ config }: ThankYouProps) {
         <circle className="checkmark-circle" cx="26" cy="26" r="24" fill="none" />
         <path className="checkmark-check" fill="none" d="M14 27l8 8 16-16" />
       </svg>
-      <h1 className="mb-2.5 text-[1.6rem] font-bold text-primary" tabIndex={-1} data-focus>
+      <h1
+        className="mb-2.5 font-display text-[1.6rem] font-bold tracking-[-0.02em] text-primary"
+        tabIndex={-1}
+        data-focus
+      >
         {t.headline || 'Vielen Dank!'}
       </h1>
-      <p className="mx-auto max-w-[460px] text-[1.05rem] text-muted">
+      <p className="mx-auto max-w-[46ch] text-[1.02rem] leading-relaxed text-text/75">
         {t.body || 'Wir haben deine Angaben erhalten und melden uns bei dir.'}
       </p>
       <ShareButtons config={config} target={shareTarget} text={shareText} />

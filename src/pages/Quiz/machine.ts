@@ -1,7 +1,6 @@
 import type { AnswerRecord, QuizConfig, QuizResult } from '@/lib/types';
 
-export type Screen =
-  'loading' | 'welcome' | 'question' | 'match' | 'rejection' | 'lead' | 'thank' | 'fatal';
+export type Screen = 'loading' | 'question' | 'rejection' | 'lead' | 'thank' | 'fatal';
 
 export interface FatalInfo {
   /** Pre-authored copy from this module only — never user input. */
@@ -23,10 +22,8 @@ export interface QuizState {
 export type QuizAction =
   | { type: 'config_loaded'; config: QuizConfig }
   | { type: 'fatal'; fatal: FatalInfo }
-  | { type: 'start' }
   | { type: 'answered'; answers: AnswerRecord[] }
   | { type: 'completed'; answers: AnswerRecord[]; result: QuizResult }
-  | { type: 'continue_to_lead' }
   | { type: 'submitted' };
 
 export const initialState: QuizState = {
@@ -41,11 +38,11 @@ export const initialState: QuizState = {
 export function quizReducer(state: QuizState, action: QuizAction): QuizState {
   switch (action.type) {
     case 'config_loaded':
+      // Candidates arrive from the job ad, which already sold the test — the
+      // first question is the landing screen, with no interstitial in between.
       return { ...state, config: action.config, screen: 'question', qIndex: 0 };
     case 'fatal':
       return { ...state, screen: 'fatal', fatal: action.fatal };
-    case 'start':
-      return { ...state, screen: 'question', qIndex: 0 };
     case 'answered':
       return { ...state, answers: action.answers, qIndex: state.qIndex + 1 };
     case 'completed':
@@ -56,8 +53,6 @@ export function quizReducer(state: QuizState, action: QuizAction): QuizState {
         result: action.result,
         screen: action.result.passed ? 'lead' : 'rejection',
       };
-    case 'continue_to_lead':
-      return { ...state, screen: 'lead' };
     case 'submitted':
       return { ...state, screen: 'thank' };
     default:
@@ -74,7 +69,7 @@ export function upsertAnswer(answers: AnswerRecord[], record: AnswerRecord): Ans
   return next;
 }
 
-/** 0 = quiz, 1 = contact details, 2 = done. Match/rejection stay in phase 0. */
+/** 0 = quiz, 1 = contact details, 2 = done. The rejection screen stays in phase 0. */
 export function currentPhase(screen: Screen): number {
   if (screen === 'thank') return 2;
   if (screen === 'lead') return 1;
@@ -90,5 +85,7 @@ export function progressPercent(state: QuizState): number {
 export function progressText(state: QuizState): string {
   const total = state.config?.questions?.length ?? 0;
   if (currentPhase(state.screen) > 0) return 'Abgeschlossen';
-  return `${Math.min(state.answers.length + 1, total)} von ${total} Fragen`;
+  // Position, not completion: the bar shows how much is answered, so labelling
+  // this "16 von 16 Fragen" next to 94% read like a contradiction.
+  return `Frage ${Math.min(state.answers.length + 1, total)} von ${total}`;
 }

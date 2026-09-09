@@ -12,17 +12,17 @@ import { cn } from '@/lib/utils';
 const AUTO_ADVANCE_MS = 280;
 
 const optionCard =
-  'flex w-full items-center gap-3.5 rounded-brand border border-border bg-card px-4 py-[15px] text-left text-base text-text transition-[border-color,background-color,transform] duration-150 active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 hover:border-primary hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] data-[state=checked]:border-accent data-[state=checked]:bg-card-selected';
+  'group flex w-full items-center gap-4 rounded-[14px] border border-border bg-card px-4 py-4 text-left text-[15.5px] text-text shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition-[border-color,background-color,box-shadow,transform] duration-150 hover:-translate-y-px hover:border-accent hover:shadow-[0_8px_20px_-12px_rgba(0,0,0,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 active:translate-y-0 data-[state=checked]:border-accent data-[state=checked]:bg-card-selected data-[state=checked]:shadow-[0_8px_20px_-14px_rgba(0,0,0,0.4)]';
 
 interface QuestionProps {
   config: QuizConfig;
   question: QuestionConfig;
-  index: number;
-  total: number;
+  /** "Frage 5 von 16" — the same string the shell shows, so the two never drift. */
+  positionLabel: string;
   onAnswer: (record: AnswerRecord) => void;
 }
 
-export function Question({ config, question, index: _i, total: _t, onAnswer }: QuestionProps) {
+export function Question({ config, question, positionLabel, onAnswer }: QuestionProps) {
   const isMulti = question.type === 'multi_select';
   const isText = question.type === 'text_input';
   const options = question.answers || [];
@@ -67,7 +67,7 @@ export function Question({ config, question, index: _i, total: _t, onAnswer }: Q
   return (
     <section>
       {question.image && (
-        <div className="mb-[18px] overflow-hidden rounded-brand bg-surface">
+        <div className="mb-6 overflow-hidden rounded-[18px] bg-surface shadow-[0_10px_30px_-24px_rgba(0,0,0,0.45)]">
           <ImageWithFallback
             src={question.image}
             alt=""
@@ -78,8 +78,11 @@ export function Question({ config, question, index: _i, total: _t, onAnswer }: Q
           />
         </div>
       )}
+      <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-deep">
+        {positionLabel}
+      </p>
       <h2
-        className="mb-[22px] text-[clamp(1.3rem,3.5vw,1.5rem)] font-bold leading-snug text-primary"
+        className="mb-6 font-display text-[clamp(1.35rem,3.5vw,1.7rem)] font-bold leading-[1.2] tracking-[-0.02em] text-primary"
         tabIndex={-1}
         data-focus
       >
@@ -112,7 +115,7 @@ export function Question({ config, question, index: _i, total: _t, onAnswer }: Q
         </div>
       ) : isMulti ? (
         <>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-3">
             {options.map((option, j) => {
               const checked = multi.includes(j);
               return (
@@ -131,7 +134,7 @@ export function Question({ config, question, index: _i, total: _t, onAnswer }: Q
               );
             })}
           </div>
-          <div className="mt-[18px]">
+          <div className="mt-5">
             <Button
               type="button"
               disabled={multi.length === 0}
@@ -157,13 +160,15 @@ export function Question({ config, question, index: _i, total: _t, onAnswer }: Q
               <span
                 aria-hidden="true"
                 className={cn(
-                  'flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border-2 bg-white transition-all duration-150',
-                  single === String(j) ? 'border-accent' : 'border-[#cbd2d8]'
+                  'flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full border-2 bg-white transition-all duration-150',
+                  single === String(j)
+                    ? 'border-accent bg-accent'
+                    : 'border-[#cbd2d8] group-hover:border-accent'
                 )}
               >
                 <Check
                   className={cn(
-                    'h-3 w-3 text-accent transition-transform duration-150',
+                    'h-3.5 w-3.5 text-white transition-transform duration-150',
                     single === String(j) ? 'scale-100' : 'scale-0'
                   )}
                   strokeWidth={3.5}
@@ -175,7 +180,7 @@ export function Question({ config, question, index: _i, total: _t, onAnswer }: Q
         </RadioGroup>
       )}
 
-      {question.hint && <p className="mt-3.5 text-sm text-muted">{question.hint}</p>}
+      {question.hint && <p className="mt-4 text-sm text-muted">{question.hint}</p>}
     </section>
   );
 }

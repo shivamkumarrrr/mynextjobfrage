@@ -1,49 +1,76 @@
 {
   "quizId": "ppc-performance-marketing",
   "quizVersion": "1.1",
-  "language": { "pronoun": "du" },
+  "language": {
+    "pronoun": "du"
+  },
   "topbarLabel": "Online-Test",
   "progressLabel": "Dein Fortschritt",
   "continueLabel": "Weiter",
-
   "branding": {
-    "primary": "#382e4a",
+    "primary": "#222222",
     "accent": "#4ade80",
     "logoUrl": "/assets/ppc-logo.png",
     "heroImage": "/assets/PPC-team-walking.jpg",
     "thankYouImage": "/assets/PPC-team-sitting.jpg"
   },
-
   "job": {
     "title": "PPC Performance Marketing Manager (m/w/d)",
     "company": "PPC GmbH"
   },
-
   "steps": [
-    { "id": "test", "label": "Online-Test" },
-    { "id": "contact", "label": "Kontaktdaten" }
+    {
+      "id": "test",
+      "label": "Online-Test"
+    },
+    {
+      "id": "contact",
+      "label": "Kontaktdaten"
+    }
   ],
-
   "welcome": {
-    "intro": "Du bist Performance-Marketing-Profi und suchst eine neue Herausforderung? Dann bewirb dich in unter 5 Minuten.",
-    "metaText": "Dauer: ca. 5 Minuten",
-    "startButton": "Online-Test starten"
+    "intro": "Du bist Performance-Marketing-Profi und suchst eine neue Herausforderung? Beantworte ein paar kurze Fragen – wir melden uns, wenn es passt."
   },
-
   "categories": {
-    "hardSkills": { "label": "Fachliche Kompetenz", "weight": 0.4 },
-    "knowledgeTests": { "label": "Fachwissen", "weight": 0.25 },
-    "domainExpertise": { "label": "Branchenerfahrung", "weight": 0.2 },
-    "fitPreferences": { "label": "Rahmenbedingungen", "weight": 0.15 }
+    "hardSkills": {
+      "label": "Fachliche Kompetenz",
+      "weight": 0.4
+    },
+    "knowledgeTests": {
+      "label": "Fachwissen",
+      "weight": 0.25
+    },
+    "domainExpertise": {
+      "label": "Branchenerfahrung",
+      "weight": 0.2
+    },
+    "fitPreferences": {
+      "label": "Rahmenbedingungen",
+      "weight": 0.15
+    }
   },
-
   "tiers": [
-    { "id": "top", "label": "Top-Kandidat", "min": 85 },
-    { "id": "strong", "label": "Starker Fit", "min": 70 },
-    { "id": "potential", "label": "Potential", "min": 50 },
-    { "id": "low", "label": "Nicht passend", "min": 0 }
+    {
+      "id": "top",
+      "label": "Top-Kandidat",
+      "min": 85
+    },
+    {
+      "id": "strong",
+      "label": "Starker Fit",
+      "min": 70
+    },
+    {
+      "id": "potential",
+      "label": "Potential",
+      "min": 50
+    },
+    {
+      "id": "low",
+      "label": "Nicht passend",
+      "min": 0
+    }
   ],
-
   "scoring": {
     "rejectThreshold": 40,
     "matchScreen": {
@@ -56,12 +83,14 @@
       "showShare": true
     }
   },
-
   "knockoutFlags": [
     {
       "id": "deutsch_below_c1",
       "description": "Deutsch unter Verhandlungsniveau",
-      "rules": { "questionId": "q_deutsch", "answerIndex": [0, 1] }
+      "rules": {
+        "questionId": "q_deutsch",
+        "answerIndex": [0, 1]
+      }
     },
     {
       "id": "zero_paid_experience",
@@ -69,13 +98,18 @@
       "rules": {
         "type": "AND",
         "rules": [
-          { "questionId": "q_google_ads", "answerIndex": [0] },
-          { "questionId": "q_meta_ads", "answerIndex": [0] }
+          {
+            "questionId": "q_google_ads",
+            "answerIndex": [0]
+          },
+          {
+            "questionId": "q_meta_ads",
+            "answerIndex": [0]
+          }
         ]
       }
     }
   ],
-
   "questions": [
     {
       "id": "q_current_work",
@@ -83,10 +117,22 @@
       "type": "single_select",
       "question": "Wo arbeitest du aktuell?",
       "answers": [
-        { "text": "In einer Agentur", "points": 100 },
-        { "text": "Inhouse bei einem Unternehmen", "points": 70 },
-        { "text": "Selbstständig", "points": 60 },
-        { "text": "Sonstiges", "points": 30 }
+        {
+          "text": "In einer Agentur",
+          "points": 100
+        },
+        {
+          "text": "Inhouse bei einem Unternehmen",
+          "points": 70
+        },
+        {
+          "text": "Selbstständig",
+          "points": 60
+        },
+        {
+          "text": "Sonstiges",
+          "points": 30
+        }
       ]
     },
     {
@@ -95,11 +141,26 @@
       "type": "single_select",
       "question": "Wie viele Jahre Berufserfahrung im Online-Marketing hast du?",
       "answers": [
-        { "text": "Praktika oder ähnlich", "points": 10 },
-        { "text": "1–2 Jahre", "points": 40 },
-        { "text": "2–3 Jahre", "points": 60 },
-        { "text": "4–6 Jahre", "points": 85 },
-        { "text": "Mehr als 6 Jahre", "points": 100 }
+        {
+          "text": "Praktika oder ähnlich",
+          "points": 10
+        },
+        {
+          "text": "1–2 Jahre",
+          "points": 40
+        },
+        {
+          "text": "2–3 Jahre",
+          "points": 60
+        },
+        {
+          "text": "4–6 Jahre",
+          "points": 85
+        },
+        {
+          "text": "Mehr als 6 Jahre",
+          "points": 100
+        }
       ]
     },
     {
@@ -108,10 +169,22 @@
       "type": "single_select",
       "question": "Wie gut beherrscht du die Sprache Deutsch?",
       "answers": [
-        { "text": "Gar nicht", "points": 0 },
-        { "text": "Grundkenntnisse", "points": 20 },
-        { "text": "Verhandlungssicher", "points": 80 },
-        { "text": "Muttersprache oder Zweitsprache", "points": 100 }
+        {
+          "text": "Gar nicht",
+          "points": 0
+        },
+        {
+          "text": "Grundkenntnisse",
+          "points": 20
+        },
+        {
+          "text": "Verhandlungssicher",
+          "points": 80
+        },
+        {
+          "text": "Muttersprache oder Zweitsprache",
+          "points": 100
+        }
       ]
     },
     {
@@ -120,10 +193,22 @@
       "type": "single_select",
       "question": "Wie gut beherrscht du die Sprache Englisch?",
       "answers": [
-        { "text": "Gar nicht", "points": 0 },
-        { "text": "Grundkenntnisse", "points": 40 },
-        { "text": "Verhandlungssicher", "points": 80 },
-        { "text": "Muttersprache oder Zweitsprache", "points": 100 }
+        {
+          "text": "Gar nicht",
+          "points": 0
+        },
+        {
+          "text": "Grundkenntnisse",
+          "points": 40
+        },
+        {
+          "text": "Verhandlungssicher",
+          "points": 80
+        },
+        {
+          "text": "Muttersprache oder Zweitsprache",
+          "points": 100
+        }
       ]
     },
     {
@@ -132,11 +217,26 @@
       "type": "single_select",
       "question": "Wie viele Jahre Erfahrung hast du mit Google Ads?",
       "answers": [
-        { "text": "0 Jahre", "points": 0 },
-        { "text": "1–2 Jahre", "points": 40 },
-        { "text": "2–3 Jahre", "points": 60 },
-        { "text": "4–6 Jahre", "points": 85 },
-        { "text": "6+ Jahre", "points": 100 }
+        {
+          "text": "0 Jahre",
+          "points": 0
+        },
+        {
+          "text": "1–2 Jahre",
+          "points": 40
+        },
+        {
+          "text": "2–3 Jahre",
+          "points": 60
+        },
+        {
+          "text": "4–6 Jahre",
+          "points": 85
+        },
+        {
+          "text": "6+ Jahre",
+          "points": 100
+        }
       ]
     },
     {
@@ -145,11 +245,26 @@
       "type": "single_select",
       "question": "Wie viele Jahre Erfahrung hast du mit Meta Ads?",
       "answers": [
-        { "text": "0 Jahre", "points": 0 },
-        { "text": "1–2 Jahre", "points": 40 },
-        { "text": "2–3 Jahre", "points": 60 },
-        { "text": "4–6 Jahre", "points": 85 },
-        { "text": "6+ Jahre", "points": 100 }
+        {
+          "text": "0 Jahre",
+          "points": 0
+        },
+        {
+          "text": "1–2 Jahre",
+          "points": 40
+        },
+        {
+          "text": "2–3 Jahre",
+          "points": 60
+        },
+        {
+          "text": "4–6 Jahre",
+          "points": 85
+        },
+        {
+          "text": "6+ Jahre",
+          "points": 100
+        }
       ]
     },
     {
@@ -158,10 +273,22 @@
       "type": "single_select",
       "question": "Mit welchen monatlichen Mediabudgets hast du bisher gearbeitet?",
       "answers": [
-        { "text": "Unter 2.000 €", "points": 20 },
-        { "text": "2.000–10.000 €", "points": 50 },
-        { "text": "10.000–50.000 €", "points": 80 },
-        { "text": "Über 50.000 €", "points": 100 }
+        {
+          "text": "Unter 2.000 €",
+          "points": 20
+        },
+        {
+          "text": "2.000–10.000 €",
+          "points": 50
+        },
+        {
+          "text": "10.000–50.000 €",
+          "points": 80
+        },
+        {
+          "text": "Über 50.000 €",
+          "points": 100
+        }
       ]
     },
     {
@@ -170,12 +297,30 @@
       "type": "single_select",
       "question": "Wie schätzt du dein SEA Know-How auf einer Skala von 0 bis 5 ein?",
       "answers": [
-        { "text": "0 – Keine Erfahrung", "points": 0 },
-        { "text": "1 – Neuling", "points": 20 },
-        { "text": "2 – Solide Grundkenntnisse", "points": 40 },
-        { "text": "3 – Fortgeschritten & umfangreich", "points": 60 },
-        { "text": "4 – SEA Experte (große Accounts)", "points": 85 },
-        { "text": "5 – Absoluter SEA Vollprofi", "points": 100 }
+        {
+          "text": "0 – Keine Erfahrung",
+          "points": 0
+        },
+        {
+          "text": "1 – Neuling",
+          "points": 20
+        },
+        {
+          "text": "2 – Solide Grundkenntnisse",
+          "points": 40
+        },
+        {
+          "text": "3 – Fortgeschritten & umfangreich",
+          "points": 60
+        },
+        {
+          "text": "4 – SEA Experte (große Accounts)",
+          "points": 85
+        },
+        {
+          "text": "5 – Absoluter SEA Vollprofi",
+          "points": 100
+        }
       ]
     },
     {
@@ -184,12 +329,30 @@
       "type": "single_select",
       "question": "Wie schätzt du dein E-Commerce Know-How ein?",
       "answers": [
-        { "text": "0 – Keine Erfahrung", "points": 0 },
-        { "text": "1 – Neuling", "points": 20 },
-        { "text": "2 – Solide", "points": 40 },
-        { "text": "3 – Fortgeschritten", "points": 60 },
-        { "text": "4 – Experte (größere Online-Shops)", "points": 85 },
-        { "text": "5 – Absoluter Vollprofi", "points": 100 }
+        {
+          "text": "0 – Keine Erfahrung",
+          "points": 0
+        },
+        {
+          "text": "1 – Neuling",
+          "points": 20
+        },
+        {
+          "text": "2 – Solide",
+          "points": 40
+        },
+        {
+          "text": "3 – Fortgeschritten",
+          "points": 60
+        },
+        {
+          "text": "4 – Experte (größere Online-Shops)",
+          "points": 85
+        },
+        {
+          "text": "5 – Absoluter Vollprofi",
+          "points": 100
+        }
       ]
     },
     {
@@ -198,12 +361,30 @@
       "type": "single_select",
       "question": "Wie schätzt du dein Know-How im Bereich Leadgenerierung ein?",
       "answers": [
-        { "text": "0 – Keine Erfahrung", "points": 0 },
-        { "text": "1 – Neuling", "points": 20 },
-        { "text": "2 – Solide", "points": 40 },
-        { "text": "3 – Fortgeschritten", "points": 60 },
-        { "text": "4 – Experte", "points": 85 },
-        { "text": "5 – Vollprofi", "points": 100 }
+        {
+          "text": "0 – Keine Erfahrung",
+          "points": 0
+        },
+        {
+          "text": "1 – Neuling",
+          "points": 20
+        },
+        {
+          "text": "2 – Solide",
+          "points": 40
+        },
+        {
+          "text": "3 – Fortgeschritten",
+          "points": 60
+        },
+        {
+          "text": "4 – Experte",
+          "points": 85
+        },
+        {
+          "text": "5 – Vollprofi",
+          "points": 100
+        }
       ]
     },
     {
@@ -212,10 +393,22 @@
       "type": "single_select",
       "question": "Wie würdest du deinen strategischen Umgang mit Marketing-Funnels beschreiben?",
       "answers": [
-        { "text": "Funnels erstellt, optimiert und A/B-Tests durchgeführt", "points": 100 },
-        { "text": "Konzipiert, aber von anderen umsetzen lassen", "points": 65 },
-        { "text": "Kenne das Konzept, habe aber kaum praktische Erfahrung", "points": 30 },
-        { "text": "Keine Erfahrung", "points": 0 }
+        {
+          "text": "Funnels erstellt, optimiert und A/B-Tests durchgeführt",
+          "points": 100
+        },
+        {
+          "text": "Konzipiert, aber von anderen umsetzen lassen",
+          "points": 65
+        },
+        {
+          "text": "Kenne das Konzept, habe aber kaum praktische Erfahrung",
+          "points": 30
+        },
+        {
+          "text": "Keine Erfahrung",
+          "points": 0
+        }
       ]
     },
     {
@@ -225,10 +418,22 @@
       "question": "Wie hoch ist der Cost per Lead in einer Kampagne mit 2.000 € Budget, 50 Leads, 500 Klicks und einer CTR von 1 %?",
       "correctAnswer": 3,
       "answers": [
-        { "text": "4 €", "points": 0 },
-        { "text": "10 €", "points": 0 },
-        { "text": "20 €", "points": 0 },
-        { "text": "40 €", "points": 100 }
+        {
+          "text": "4 €",
+          "points": 0
+        },
+        {
+          "text": "10 €",
+          "points": 0
+        },
+        {
+          "text": "20 €",
+          "points": 0
+        },
+        {
+          "text": "40 €",
+          "points": 100
+        }
       ]
     },
     {
@@ -238,10 +443,22 @@
       "question": "Ein Kunde investiert 5.000 € in Google Ads und erzielt damit 20.000 € Umsatz. Wie hoch ist der ROAS?",
       "correctAnswer": 1,
       "answers": [
-        { "text": "2", "points": 0 },
-        { "text": "4", "points": 100 },
-        { "text": "15", "points": 0 },
-        { "text": "25", "points": 0 }
+        {
+          "text": "2",
+          "points": 0
+        },
+        {
+          "text": "4",
+          "points": 100
+        },
+        {
+          "text": "15",
+          "points": 0
+        },
+        {
+          "text": "25",
+          "points": 0
+        }
       ]
     },
     {
@@ -251,11 +468,27 @@
       "question": "In welchen weiteren digitalen Kanälen hast du Erfahrung? (Mehrfachauswahl möglich)",
       "maxPoints": 100,
       "answers": [
-        { "text": "SEO", "points": 20 },
-        { "text": "Native Ads", "points": 25 },
-        { "text": "Conversion Optimierung", "points": 25 },
-        { "text": "Leadgenerierung", "points": 20 },
-        { "text": "Keinem", "points": 0, "exclusive": true }
+        {
+          "text": "SEO",
+          "points": 20
+        },
+        {
+          "text": "Native Ads",
+          "points": 25
+        },
+        {
+          "text": "Conversion Optimierung",
+          "points": 25
+        },
+        {
+          "text": "Leadgenerierung",
+          "points": 20
+        },
+        {
+          "text": "Keinem",
+          "points": 0,
+          "exclusive": true
+        }
       ]
     },
     {
@@ -264,10 +497,22 @@
       "type": "single_select",
       "question": "Wie häufig möchtest du ortsunabhängig arbeiten?",
       "answers": [
-        { "text": "Nie", "points": 100 },
-        { "text": "Gelegentlich", "points": 90 },
-        { "text": "Überwiegend", "points": 50 },
-        { "text": "Immer", "points": 20 }
+        {
+          "text": "Nie",
+          "points": 100
+        },
+        {
+          "text": "Gelegentlich",
+          "points": 90
+        },
+        {
+          "text": "Überwiegend",
+          "points": 50
+        },
+        {
+          "text": "Immer",
+          "points": 20
+        }
       ]
     },
     {
@@ -279,7 +524,6 @@
       "points": null
     }
   ],
-
   "leadForm": {
     "heading": "Deine Kontaktdaten",
     "subtitle": "Fülle bitte alle Pflichtfelder aus, damit wir uns bei dir melden können.",
@@ -287,7 +531,6 @@
     "salutation": true,
     "salutationLabel": "Anrede",
     "whatsappOptIn": "* Ich stimme der Datenschutzerklärung und Kontaktaufnahme zu (Widerruf jederzeit möglich)",
-    "privacyNote": "Deine Daten werden ausschließlich zur Bearbeitung deiner Bewerbung verwendet und gemäß DSGVO vertraulich behandelt.",
     "fields": [
       {
         "name": "firstName",
@@ -324,19 +567,31 @@
         "placeholder": "+49 123 456 7890",
         "errorMessage": "Bitte gib deine Telefonnummer an"
       },
-      { "name": "startDate", "label": "Frühester Starttermin", "type": "date", "required": false },
-      { "name": "message", "label": "Nachricht (optional)", "type": "textarea", "required": false }
+      {
+        "name": "startDate",
+        "label": "Frühester Starttermin",
+        "type": "date",
+        "required": false
+      },
+      {
+        "name": "message",
+        "label": "Nachricht (optional)",
+        "type": "textarea",
+        "required": false
+      }
     ]
   },
-
   "thankYou": {
     "headline": "Vielen Dank für deine Bewerbung!",
     "body": "Wir prüfen dein Profil und melden uns innerhalb von 3 Werktagen bei dir.",
     "footerNote": "Du erhältst keine automatische E-Mail. Wir melden uns persönlich bei dir.",
-    "share": { "whatsapp": true, "linkedin": true, "facebook": true },
+    "share": {
+      "whatsapp": true,
+      "linkedin": true,
+      "facebook": true
+    },
     "shareText": "Ich habe mich als PPC Performance Marketing Manager bei PPC GmbH beworben! Jetzt auch bewerben:"
   },
-
   "webhook": {
     "url": "/api/send-email"
   }

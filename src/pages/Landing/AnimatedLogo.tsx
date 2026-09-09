@@ -21,11 +21,7 @@ export function AnimatedLogo({ src, alt, className = '' }: AnimatedLogoProps) {
         ease: [0.22, 1, 0.36, 1],
       }}
     >
-      <img
-        src={src}
-        alt={alt}
-        className="hero-logo-highlight h-full w-auto object-contain"
-      />
+      <img src={src} alt={alt} className="hero-logo-highlight h-full w-auto object-contain" />
     </motion.div>
   );
 }

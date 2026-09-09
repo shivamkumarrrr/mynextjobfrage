@@ -1,30 +1,30 @@
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { company, jobInfo } from './content';
+import { jobInfo } from './content';
 import { HomeIcon, LocationIcon } from './icons';
 
+/**
+ * The job's hard facts as inline chips. They used to sit in a bordered card
+ * that repeated the company name and logo already shown in the header, which
+ * boxed off the hero's reading flow for no new information.
+ */
 export function JobInfoCard() {
   return (
-    <Card className="p-4 text-left shadow-[0_1px_2px_rgba(26,46,56,0.04)]">
-      <div className="mb-3.5 flex items-center gap-2 text-sm font-medium text-text">
-        <img
-          className="h-[26px] w-[26px] rounded-full border border-border bg-card object-contain p-[3px]"
-          src={company.logo}
-          alt=""
-        />
-        <span>{company.name}</span>
-      </div>
-      <div className="mb-2.5 flex flex-wrap gap-2.5">
+    <ul className="flex list-none flex-wrap gap-2.5">
+      <li>
         <Badge variant="soft">
           <LocationIcon />
           {jobInfo.location}
         </Badge>
+      </li>
+      <li>
         <Badge variant="soft">
           <HomeIcon />
           {jobInfo.remote}
         </Badge>
+      </li>
+      <li>
         <Badge variant="soft">{jobInfo.hours}</Badge>
-      </div>
-    </Card>
+      </li>
+    </ul>
   );
 }

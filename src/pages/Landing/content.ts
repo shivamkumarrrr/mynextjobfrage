@@ -5,23 +5,27 @@
  */
 export const QUIZ_LINK = 'app?q=ppc-performance-marketing';
 
+/** One CTA label for every button on the page — the live job ad uses the same wording throughout. */
+export const CTA_LABEL = "Hier geht's zum TEST";
+
 export const company = {
   name: 'PPC GmbH',
   tagline: 'Palz Performance Consulting',
   logo: 'assets/ppc-logo.png',
   address: 'Viktoriastr. 19 · 66111 Saarbrücken',
   phone: 'Tel: 0681 – 410 968 40',
+  phoneHref: '+4968141096840',
 };
 
 export const hero = {
   title: 'Performance Marketing Manager mit Schwerpunkt Leadgenerierung (m/w/d) gesucht',
+  eyebrow: 'Stellenangebot · Saarbrücken & Remote',
   photo: 'assets/PPC-team-walking.jpg',
   photoAlt: 'PPC GmbH Team',
   intro:
     'Du kannst dir vorstellen in einer Performance Marketing Agentur zu arbeiten und hast Lust dich und deine Expertise im Bereich Leadgen in spannenden Projekten einzubringen und stetig weiterzuentwickeln?',
   ctaLead:
     'Mache jetzt unseren kurzen Online Bewerber-Test und finde heraus, ob du zu uns und wir zu dir passen:',
-  ctaLabel: "Hier geht's zum TEST",
 };
 
 export const jobInfo = {
@@ -29,17 +33,59 @@ export const jobInfo = {
   remote: 'Homeoffice möglich',
   hours: '32–40 h pro Woche',
 };
-export const benefits: string[] = [
-  'Überdurchschnittlich gute Bezahlung & attraktive Prämien',
-  'Spannende Projekte im Bereich Leadgenerierung und E-Commerce',
-  'Zuschüsse zur betrieblichen Vorsorge, Kranken- & BU-Versicherung',
-  'Unbefristeter Arbeitsvertrag und 33 Tage Urlaub',
-  'Weiterentwicklung eigener Startups',
-  'Job Bike sowie weitere Mitarbeiter-Benefits',
-  'Remote Office: Ortsunabhängiges & flexibles Arbeiten',
-  'Gute Weiterbildungsmöglichkeiten durch Seminare und Coachings',
-  'Gute Aufstiegsmöglichkeiten',
+/**
+ * Six facts, not the ad's full list: the section has to stay one readable screen
+ * on mobile, so each card carries the strongest claim plus the detail that backs
+ * it. The ad's remaining perks (Job Bike, Sachbezüge, eigene Startups) are
+ * covered by the "Dein Gehalt" / "Deine Vorteile" sections further down.
+ */
+export const benefits: {
+  title: string;
+  body: string;
+  icon: 'coins' | 'target' | 'calendar' | 'wifi' | 'graduation' | 'shield';
+}[] = [
+  {
+    title: 'Überdurchschnittliche Bezahlung',
+    body: 'Gehalt über Marktniveau, dazu attraktive Prämien für persönliche und unternehmerische Erfolge.',
+    icon: 'coins',
+  },
+  {
+    title: 'Projekte mit Wirkung',
+    body: 'Leadgenerierung und E-Commerce für große internationale Kunden, KMUs und Startups.',
+    icon: 'target',
+  },
+  {
+    title: 'Unbefristet & 33 Tage Urlaub',
+    body: 'Sicherer Vertrag ab dem ersten Tag – und genug Zeit, um wirklich abzuschalten.',
+    icon: 'calendar',
+  },
+  {
+    title: 'Remote Office',
+    body: 'Ortsunabhängig und flexibel arbeiten – im Büro in Saarbrücken oder von überall.',
+    icon: 'wifi',
+  },
+  {
+    title: 'Weiterbildung inklusive',
+    body: 'Seminare, Coachings und echte Aufstiegsmöglichkeiten statt Stillstand.',
+    icon: 'graduation',
+  },
+  {
+    title: 'Für später abgesichert',
+    body: 'Zuschüsse zur betrieblichen Altersvorsorge, Kranken- und Berufsunfähigkeitsversicherung.',
+    icon: 'shield',
+  },
 ];
+
+export const benefitsHeading = 'Die wichtigsten Fakten im Überblick';
+
+/** Small uppercase label above each section heading, so the page has a spine. */
+export const sectionEyebrows = {
+  benefits: 'Warum PPC',
+  process: 'Bewerbungsablauf',
+  jobDetails: 'Stellenbeschreibung',
+  team: 'Das Team',
+  finalCta: 'Jetzt bewerben',
+};
 
 export const jobDetails = [
   {
@@ -82,12 +128,12 @@ export const jobDetails = [
 export const team = {
   photo: 'assets/PPC-team-sitting.jpg',
   alt: 'Das PPC-Team',
+  heading: 'Das PPC-Team',
   caption: 'Performance outside the office',
 };
 
 export const finalCta = {
   heading: 'Finde heraus, ob wir zusammenpassen',
-  label: '→ Jetzt Online-Test starten',
 };
 
 export const processHeading = 'Dein Weg zu uns';
@@ -101,7 +147,7 @@ export const processSteps: {
   {
     number: '01',
     title: 'Nimm an unserem Test teil',
-    body: 'Kurzer Test, ca. 3 Minuten – zeig uns, was du kannst.',
+    body: 'Kurzer Test, ca. 5 Minuten – zeig uns, was du kannst.',
     icon: 'clipboard',
   },
   {
@@ -113,7 +159,7 @@ export const processSteps: {
   {
     number: '03',
     title: 'Gespräch & Start',
-    body: 'Wenn alles passt, kannst du nach einem erfolgreichen Gespräch online oder bei uns im Haus… sofort bei uns im Team anfangen.',
+    body: 'Passt alles, führen wir ein Gespräch – online oder bei uns im Haus. Danach kannst du sofort im Team anfangen.',
     icon: 'rocket',
   },
 ];

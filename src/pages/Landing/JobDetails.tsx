@@ -5,7 +5,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { jobDetails } from './content';
+import { SectionHeading } from './SectionHeading';
+import { jobDetails, sectionEyebrows } from './content';
 
 const containerVariants = {
   hidden: {},
@@ -26,19 +27,14 @@ const itemVariants = {
 /** "Alles zum Job" — shadcn/Radix accordion in place of the hand-rolled one. */
 export function JobDetails() {
   return (
-    <section className="px-5 pb-12 md:px-10 md:pb-14">
-      <div className="mx-auto max-w-shell">
-        <motion.h2
-          className="mt-1.5 font-display text-2xl font-bold tracking-[-0.03em] text-primary md:text-3xl"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Alles zum Job
-        </motion.h2>
+    <section className="bg-bg px-5 py-16 md:px-10 md:py-24">
+      {/* Narrower than the card grids above: these panels open into long prose,
+          and a 1300px measure is unreadable. */}
+      <div className="mx-auto max-w-[880px]">
+        <SectionHeading eyebrow={sectionEyebrows.jobDetails} title="Alles zum Job" />
+
         <motion.div
-          className="mt-6 flex flex-col gap-2.5"
+          className="mt-10 flex flex-col gap-2.5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}

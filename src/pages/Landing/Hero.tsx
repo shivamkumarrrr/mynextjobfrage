@@ -1,13 +1,13 @@
-import { motion, MotionConfig } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ImageWithFallback } from '@/components/ImageWithFallback';
 import { Button } from '@/components/ui/button';
 import { JobInfoCard } from './JobInfoCard';
-import { QUIZ_LINK, company, hero } from './content';
+import { CTA_LABEL, QUIZ_LINK, hero } from './content';
 
 const contentVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.09, delayChildren: 0.15 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
   },
 };
 
@@ -22,26 +22,45 @@ const itemVariants = {
 
 export function Hero() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-[1100px] px-5 pt-4 pb-10 md:px-10 md:pt-5 md:pb-14">
-        {/* Logo centered at top */}
-        <motion.div
-          className="mb-10 flex flex-col items-center md:mb-12"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <img src={company.logo} alt={company.name} className="h-10 w-auto md:h-12" />
-          <p className="mt-3 text-[0.7rem] font-semibold tracking-[0.3px] text-muted">
-            {company.tagline}
-          </p>
-        </motion.div>
-
-        {/* Two columns — photo left, content right */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-6">
-          {/* Photo — full team, nothing cut */}
+    <section id="top" className="bg-white px-5 md:px-10">
+      <div className="mx-auto max-w-shell pb-14 pt-8 md:pb-24 md:pt-16">
+        {/*
+          Three grid items, two layouts. On mobile they read title → photo →
+          pitch, so the headline lands first and the CTA is not pushed a full
+          photo-height down the page. From md up the photo moves into its own
+          column beside both text blocks.
+        */}
+        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,44%)] md:grid-rows-[auto_auto] md:items-center md:gap-x-14 md:gap-y-8">
           <motion.div
-            className="overflow-hidden rounded-brand md:w-[48%] md:shrink-0"
+            className="flex min-w-0 flex-col gap-4 md:col-start-1 md:row-start-1 md:self-end"
+            initial="hidden"
+            animate="visible"
+            variants={contentVariants}
+          >
+            <motion.p
+              className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-deep"
+              variants={itemVariants}
+            >
+              {hero.eyebrow}
+            </motion.p>
+
+            <motion.h1
+              className="font-display text-[2rem] font-bold leading-[1.08] tracking-[-0.03em] text-primary md:text-[2.9rem]"
+              variants={itemVariants}
+            >
+              <span className="hero-title-highlight">Performance Marketing Manager</span>{' '}
+              <span className="font-normal text-text">mit Schwerpunkt Leadgenerierung (m/w/d)</span>
+            </motion.h1>
+
+            <motion.div variants={itemVariants}>
+              <JobInfoCard />
+            </motion.div>
+          </motion.div>
+
+          {/* Fixed aspect so the photo is a deliberate shape at every width
+              instead of whatever the file happens to be. */}
+          <motion.div
+            className="overflow-hidden rounded-[18px] bg-surface shadow-[0_18px_50px_-24px_rgba(0,0,0,0.45)] md:col-start-2 md:row-span-2 md:row-start-1"
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -50,57 +69,31 @@ export function Hero() {
               src={hero.photo}
               alt={hero.photoAlt}
               fallbackLabel="PPC Team"
-              className="block w-full h-auto"
-              fallbackClassName="w-full h-auto"
+              className="block aspect-[16/10] w-full object-cover object-center md:aspect-[4/3]"
+              fallbackClassName="aspect-[16/10] md:aspect-[4/3]"
             />
           </motion.div>
 
-          {/* Content */}
           <motion.div
-            className="flex min-w-0 flex-1 flex-col gap-4 md:pl-8"
+            className="flex min-w-0 flex-col gap-4 md:col-start-1 md:row-start-2 md:self-start"
             initial="hidden"
             animate="visible"
             variants={contentVariants}
           >
-            <motion.h1
-              className="font-display text-[1.75rem] leading-[1.15] tracking-[-0.02em] text-primary md:text-[2.25rem]"
+            <motion.p
+              className="max-w-[54ch] text-[16px] leading-relaxed text-text/80"
               variants={itemVariants}
             >
-              <span className="hero-title-highlight font-bold">Performance Marketing Manager</span>{' '}
-              <span className="font-normal">mit Schwerpunkt Leadgenerierung (m/w/d) gesucht</span>
-            </motion.h1>
-
-            <motion.div variants={itemVariants}>
-              <JobInfoCard />
-            </motion.div>
-
-            <motion.p className="text-[15px] leading-relaxed text-muted" variants={itemVariants}>
               {hero.intro}
             </motion.p>
 
-            <motion.p className="text-[15px] font-bold text-text" variants={itemVariants}>
-              {hero.ctaLead}
-            </motion.p>
-
-            <motion.div variants={itemVariants}>
-              <MotionConfig reducedMotion="user">
-                <motion.div
-                  className="inline-block rounded-full"
-                  animate={{
-                    scale: [1, 1.04, 1],
-                    boxShadow: [
-                      '0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent)',
-                      '0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent)',
-                      '0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent)',
-                    ],
-                  }}
-                  transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                >
-                  <Button asChild size="pill" className="gap-1.5 text-sm">
-                    <a href={QUIZ_LINK}>{hero.ctaLabel}</a>
-                  </Button>
-                </motion.div>
-              </MotionConfig>
+            <motion.div className="flex flex-col items-start gap-3.5" variants={itemVariants}>
+              <p className="max-w-[46ch] text-[15px] font-semibold text-text">{hero.ctaLead}</p>
+              <div data-hero-cta>
+                <Button asChild size="lg" className="rounded-full">
+                  <a href={QUIZ_LINK}>{CTA_LABEL}</a>
+                </Button>
+              </div>
             </motion.div>
           </motion.div>
         </div>

@@ -68,7 +68,6 @@ export interface LeadFormConfig {
   salutation?: boolean;
   salutationLabel?: string;
   whatsappOptIn?: boolean | string;
-  privacyNote?: string;
   fields?: LeadField[];
   cvUpload?: boolean;
   certificatesUpload?: boolean;
@@ -111,7 +110,8 @@ export interface QuizConfig {
   branding?: Branding;
   job?: { title?: string; company?: string };
   steps?: { id: string; label: string }[];
-  welcome?: { intro?: string; metaText?: string; startButton?: string };
+  /** No welcome screen — `intro` only feeds the page description / og tags via applyMeta(). */
+  welcome?: { intro?: string };
   categories?: Record<string, Category>;
   tiers?: Tier[];
   scoring?: ScoringConfig;

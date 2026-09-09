@@ -90,27 +90,19 @@
 
 /* Hero title coloring animation */
 .hero-title-highlight {
+  /* Ends stay on the ink colour and only the middle warms up: pure --accent on
+     white sits near 2.3:1, under the 3:1 large-text floor. */
   background: linear-gradient(
     90deg,
     var(--primary) 0%,
-    var(--accent) 50%,
+    var(--accent-deep) 55%,
     var(--primary) 100%
   );
-  background-size: 200% auto;
+  background-size: 100% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: colorShift 3s ease-in-out infinite;
-}
-
-@keyframes colorShift {
-  0%,
-  100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
+  font-weight: 700;
 }
 
 /* Logo coloring animation — purple + orange hue shift */

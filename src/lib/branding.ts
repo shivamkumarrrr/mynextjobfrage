@@ -23,6 +23,7 @@ export function applyBranding(config: QuizConfig): void {
   if (b.accent) root.style.setProperty('--accent', b.accent);
   if (b.primary) root.style.setProperty('--primary-hover', darken(b.primary, 0.85));
   if (b.accent) root.style.setProperty('--accent-hover', darken(b.accent, 0.82));
+  if (b.accent) root.style.setProperty('--accent-deep', darken(b.accent, 0.7));
   if (b.bg) root.style.setProperty('--bg', b.bg);
   if (b.text) root.style.setProperty('--text', b.text);
   if (b.radius) root.style.setProperty('--radius', b.radius);
