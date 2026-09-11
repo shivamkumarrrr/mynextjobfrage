@@ -21,9 +21,8 @@ import { cn } from '@/lib/utils';
 const SALUTATIONS = ['Herr', 'Frau', 'Keine Angabe'] as const;
 const EMAIL_RE = /^\S+@\S+\.\S+$/;
 const MAX_FILE_BYTES = 8 * 1024 * 1024;
-const MAX_CERTIFICATE_FILES = 5;
-const CV_ACCEPT = '.pdf,.doc,.docx';
-const CERTIFICATES_ACCEPT = '.pdf,.doc,.docx,.jpg,.jpeg,.png';
+const MAX_ATTACHMENT_FILES = 6;
+const ATTACHMENTS_ACCEPT = '.pdf,.doc,.docx,.jpg,.jpeg,.png';
 
 function formatFileSize(bytes: number): string {
   if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
@@ -228,7 +227,9 @@ export function Lead({ config, onSubmit }: LeadProps) {
   const lf = config.leadForm || {};
   // Lead only renders on the passed path (rejection routes elsewhere), so the
   // match headline is shown here — as a compact banner, not its own screen.
-  const matchHeadline = (config.scoring && config.scoring.matchScreen?.headline) || 'Volltreffer!';
+  const matchHeadline =
+    (config.scoring && config.scoring.matchScreen?.headline) || 'Volltreffer: Wir passen zusammen';
+  const matchBody = (config.scoring && config.scoring.matchScreen?.body) || '';
   const fields = useMemo(() => lf.fields || [], [lf.fields]);
   const rows = useMemo(() => buildFieldRows(fields), [fields]);
   const schema = useMemo(
@@ -247,44 +248,26 @@ export function Lead({ config, onSubmit }: LeadProps) {
 
   const form = useForm({ resolver: zodResolver(schema), defaultValues, mode: 'onSubmit' });
 
-  const [cvFile, setCvFile] = useState<FileAttachment | null>(null);
-  const [cvError, setCvError] = useState<string | null>(null);
-  const [certFiles, setCertFiles] = useState<FileAttachment[]>([]);
-  const [certError, setCertError] = useState<string | null>(null);
+  const [files, setFiles] = useState<FileAttachment[]>([]);
+  const [fileError, setFileError] = useState<string | null>(null);
 
-  const handleCvAdd = async (fileList: FileList) => {
-    const file = fileList[0];
-    if (file.size > MAX_FILE_BYTES) {
-      setCvError('Datei ist zu groß (max. 8 MB).');
-      return;
-    }
-    setCvError(null);
-    setCvFile(await readFileAsAttachment(file));
-  };
-
-  const handleCertAdd = async (fileList: FileList) => {
+  const handleFilesAdd = async (fileList: FileList) => {
     const incoming = Array.from(fileList);
     const tooBig = incoming.find((f) => f.size > MAX_FILE_BYTES);
     if (tooBig) {
-      setCertError(`"${tooBig.name}" ist zu groß (max. 8 MB).`);
+      setFileError(`"${tooBig.name}" ist zu groß (max. 8 MB).`);
       return;
     }
-    if (certFiles.length + incoming.length > MAX_CERTIFICATE_FILES) {
-      setCertError(`Maximal ${MAX_CERTIFICATE_FILES} Dateien möglich.`);
+    if (files.length + incoming.length > MAX_ATTACHMENT_FILES) {
+      setFileError(`Maximal ${MAX_ATTACHMENT_FILES} Dateien möglich.`);
       return;
     }
-    setCertError(null);
+    setFileError(null);
     const attachments = await Promise.all(incoming.map(readFileAsAttachment));
-    setCertFiles((prev) => [...prev, ...attachments]);
+    setFiles((prev) => [...prev, ...attachments]);
   };
 
-  const cvRequired = lf.cvUpload !== false;
-
   const submit = (values: Record<string, unknown>) => {
-    if (cvRequired && !cvFile) {
-      setCvError('Bitte lade deinen Lebenslauf hoch.');
-      return;
-    }
     const str = (name: string) => String(values[name] ?? '').trim();
     const candidate: Candidate = {
       salutation: lf.salutation ? String(values.salutation || 'Keine Angabe') : '',
@@ -296,8 +279,11 @@ export function Lead({ config, onSubmit }: LeadProps) {
       startDate: str('startDate'),
       message: str('message'),
       whatsappOptIn: values.whatsappOptIn === true,
-      cv: cvFile,
-      certificates: certFiles,
+      // The form no longer asks for a CV specifically, so nothing can claim to
+      // be one. Everything the candidate attaches rides in `certificates`;
+      // `cv` stays in the payload as null because the shape is a fixed contract.
+      cv: null,
+      certificates: files,
     };
     onSubmit(candidate);
   };
@@ -355,9 +341,9 @@ export function Lead({ config, onSubmit }: LeadProps) {
 
   return (
     <section>
-      <div className="mb-3 flex animate-fadeSlideUp items-center gap-2">
-        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-white">
-          <svg viewBox="0 0 16 16" aria-hidden="true" className="h-3 w-3">
+      <div className="mb-6 animate-fadeSlideUp">
+        <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white">
+          <svg viewBox="0 0 16 16" aria-hidden="true" className="h-5 w-5">
             <path
               d="M3.5 8.5l3 3 6-7"
               fill="none"
@@ -368,20 +354,15 @@ export function Lead({ config, onSubmit }: LeadProps) {
             />
           </svg>
         </span>
-        <span className="text-[13px] font-bold uppercase tracking-[0.08em] text-accent-deep">
+        <h2
+          className="font-display text-[1.75rem] font-bold leading-[1.15] tracking-[-0.02em] text-primary md:text-[2.05rem]"
+          tabIndex={-1}
+          data-focus
+        >
           {matchHeadline}
-        </span>
+        </h2>
+        {matchBody && <p className="mt-3 max-w-[46ch] leading-relaxed text-text/75">{matchBody}</p>}
       </div>
-      <h2
-        className="mb-1.5 font-display text-[1.55rem] font-bold tracking-[-0.02em] text-primary"
-        tabIndex={-1}
-        data-focus
-      >
-        {lf.heading || 'Deine Kontaktdaten'}
-      </h2>
-      <p className="mb-6 text-muted">
-        {lf.subtitle || 'Bitte fülle alle Pflichtfelder aus, damit wir dich erreichen können.'}
-      </p>
 
       <Form {...form}>
         <form
@@ -430,28 +411,19 @@ export function Lead({ config, onSubmit }: LeadProps) {
             )
           )}
 
-          {cvRequired && (
+          {lf.upload !== false && (
             <FileUploadField
-              label="Lebenslauf *"
-              help="PDF oder Word, max. 8 MB"
-              accept={CV_ACCEPT}
-              files={cvFile ? [cvFile] : []}
-              error={cvError}
-              onAdd={handleCvAdd}
-              onRemove={() => setCvFile(null)}
-            />
-          )}
-
-          {lf.certificatesUpload !== false && (
-            <FileUploadField
-              label="Zertifikate (optional)"
-              help="PDF, Word oder Bilder, max. 8 MB pro Datei"
-              accept={CERTIFICATES_ACCEPT}
+              label={lf.uploadLabel || 'Anhänge (optional)'}
+              help={
+                lf.uploadHelp ||
+                'Hier kannst du Lebenslauf, Zertifikate etc. hochladen. In diesem Schritt ist das aber nicht erforderlich.'
+              }
+              accept={ATTACHMENTS_ACCEPT}
               multiple
-              files={certFiles}
-              error={certError}
-              onAdd={handleCertAdd}
-              onRemove={(i) => setCertFiles((prev) => prev.filter((_, idx) => idx !== i))}
+              files={files}
+              error={fileError}
+              onAdd={handleFilesAdd}
+              onRemove={(i) => setFiles((prev) => prev.filter((_, idx) => idx !== i))}
             />
           )}
 

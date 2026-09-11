@@ -69,8 +69,10 @@ export interface LeadFormConfig {
   salutationLabel?: string;
   whatsappOptIn?: boolean | string;
   fields?: LeadField[];
-  cvUpload?: boolean;
-  certificatesUpload?: boolean;
+  /** One optional attachment field; `false` hides it entirely. */
+  upload?: boolean;
+  uploadLabel?: string;
+  uploadHelp?: string;
 }
 
 export interface Branding {
