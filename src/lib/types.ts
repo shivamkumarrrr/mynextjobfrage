@@ -59,6 +59,8 @@ export interface LeadField {
   placeholder?: string;
   help?: string;
   errorMessage?: string;
+  /** Textarea only: caps the input and shows a live "x / max" counter. */
+  maxLength?: number;
 }
 
 export interface LeadFormConfig {
@@ -165,11 +167,18 @@ export interface FileAttachment {
 
 export interface Candidate {
   salutation: string;
+  /**
+   * The form asks for one full name (as the live quiz does). `firstName` and
+   * `lastName` are still derived from it and still shipped, because the webhook
+   * payload shape is an integration contract.
+   */
   firstName: string;
   lastName: string;
   name: string;
   email: string;
   phone: string;
+  beruf: string;
+  wohnort: string;
   startDate: string;
   message: string;
   whatsappOptIn: boolean;

@@ -269,13 +269,19 @@ export function Lead({ config, onSubmit }: LeadProps) {
 
   const submit = (values: Record<string, unknown>) => {
     const str = (name: string) => String(values[name] ?? '').trim();
+    // One "Name" field is what the candidate fills in; first/last are split back
+    // out of it so the webhook payload keeps the keys it has always had.
+    const fullName = str('name') || [str('firstName'), str('lastName')].filter(Boolean).join(' ');
+    const [firstToken, ...restTokens] = fullName.split(/\s+/).filter(Boolean);
     const candidate: Candidate = {
       salutation: lf.salutation ? String(values.salutation || 'Keine Angabe') : '',
-      firstName: str('firstName'),
-      lastName: str('lastName'),
-      name: [str('firstName'), str('lastName')].filter(Boolean).join(' '),
+      firstName: str('firstName') || firstToken || '',
+      lastName: str('lastName') || restTokens.join(' '),
+      name: fullName,
       email: str('email'),
       phone: str('phone'),
+      beruf: str('beruf'),
+      wohnort: str('wohnort'),
       startDate: str('startDate'),
       message: str('message'),
       whatsappOptIn: values.whatsappOptIn === true,
@@ -311,12 +317,20 @@ export function Lead({ config, onSubmit }: LeadProps) {
           </FormLabel>
           <FormControl>
             {field.type === 'textarea' ? (
-              <Textarea
-                rows={4}
-                placeholder={field.placeholder || ''}
-                {...rhf}
-                value={String(rhf.value ?? '')}
-              />
+              <div>
+                <Textarea
+                  rows={4}
+                  maxLength={field.maxLength}
+                  placeholder={field.placeholder || ''}
+                  {...rhf}
+                  value={String(rhf.value ?? '')}
+                />
+                {field.maxLength && (
+                  <p className="mt-1 text-right text-[12px] text-muted">
+                    {String(rhf.value ?? '').length} / {field.maxLength}
+                  </p>
+                )}
+              </div>
             ) : field.type === 'checkbox' ? (
               <Checkbox
                 checked={rhf.value === true}
@@ -451,8 +465,9 @@ export function Lead({ config, onSubmit }: LeadProps) {
             className="mt-1.5 animate-fadeSlideUp py-4 text-[16.5px]"
             style={{ animationDelay: '350ms' }}
           >
-            {lf.submitLabel || 'Bewerbung absenden ›'}
+            {lf.submitLabel || 'Absenden'}
           </Button>
+          <p className="text-center text-[12.5px] text-muted">* Pflichtfelder</p>
         </form>
       </Form>
     </section>

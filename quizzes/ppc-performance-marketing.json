@@ -75,7 +75,7 @@
     "rejectThreshold": 40,
     "matchScreen": {
       "headline": "Volltreffer: Wir passen zusammen",
-      "body": "Dein Profil passt richtig gut zu dieser Stelle. Hinterlasse uns nur noch deine Kontaktdaten, damit wir uns bei dir melden können."
+      "body": "Herzlichen Glückwunsch! Du erfüllst die notwendigen Voraussetzungen für die Stelle. Wir würden uns freuen, wenn auch wir dein Interesse geweckt haben und du im nächsten Schritt mit uns in Kontakt trittst. Wir melden uns dann schnellstmöglich bei dir mit weiteren Informationen."
     },
     "rejectScreen": {
       "headline": "Leider passt es aktuell nicht.",
@@ -527,57 +527,54 @@
   "leadForm": {
     "heading": "Deine Kontaktdaten",
     "subtitle": "Fülle bitte alle Pflichtfelder aus, damit wir uns bei dir melden können.",
-    "submitLabel": "Bewerbung absenden ›",
-    "salutation": true,
-    "salutationLabel": "Anrede",
+    "submitLabel": "Absenden",
+    "salutation": false,
     "whatsappOptIn": "* Ich stimme der Datenschutzerklärung und Kontaktaufnahme zu (Widerruf jederzeit möglich)",
     "fields": [
       {
-        "name": "firstName",
-        "label": "Vorname",
+        "name": "name",
+        "label": "Name",
         "type": "text",
         "required": true,
-        "half": true,
-        "placeholder": "Max",
-        "errorMessage": "Bitte gib deinen Vornamen an"
+        "placeholder": "Vor- und Nachname",
+        "errorMessage": "Bitte gib deinen Namen an."
       },
       {
-        "name": "lastName",
-        "label": "Nachname",
-        "type": "text",
-        "required": true,
-        "half": true,
-        "placeholder": "Mustermann",
-        "errorMessage": "Bitte gib deinen Nachnamen an"
+        "name": "phone",
+        "label": "Telefon",
+        "type": "tel",
+        "required": false,
+        "placeholder": "Handy- oder Festnetznummer"
       },
       {
         "name": "email",
         "label": "E-Mail",
         "type": "email",
         "required": true,
-        "placeholder": "max@beispiel.de",
-        "errorMessage": "Bitte gib eine gültige E-Mail-Adresse an"
+        "placeholder": "Wichtigste E-Mailadresse",
+        "errorMessage": "Bitte gib eine gültige E-Mail-Adresse an."
       },
       {
-        "name": "phone",
-        "label": "Telefon",
-        "type": "tel",
-        "required": true,
-        "help": "damit wir dich schneller erreichen können",
-        "placeholder": "+49 123 456 7890",
-        "errorMessage": "Bitte gib deine Telefonnummer an"
+        "name": "beruf",
+        "label": "Berufsbezeichnung",
+        "type": "text",
+        "required": false,
+        "placeholder": "Aktueller Beruf"
       },
       {
-        "name": "startDate",
-        "label": "Frühester Starttermin",
-        "type": "date",
-        "required": false
+        "name": "wohnort",
+        "label": "Wohnort",
+        "type": "text",
+        "required": false,
+        "placeholder": "Aktueller Wohnort"
       },
       {
         "name": "message",
-        "label": "Nachricht (optional)",
+        "label": "Weitere Bemerkungen",
         "type": "textarea",
-        "required": false
+        "required": false,
+        "maxLength": 350,
+        "placeholder": "Hier ist Platz für alles, was du uns sonst noch mitteilen möchtest"
       }
     ],
     "uploadLabel": "Anhänge (optional)",

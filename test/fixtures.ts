@@ -68,6 +68,8 @@ export const testCandidate: Candidate = {
   name: 'Erika Mustermann',
   email: 'erika@beispiel.de',
   phone: '+49 123 456 7890',
+  beruf: 'Performance Marketing Managerin',
+  wohnort: 'Saarbrücken',
   startDate: '2026-09-01',
   message: 'Ich freue mich auf ein Gespräch.',
   whatsappOptIn: true,
